@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Amabile">
 <meta name="theme-color" content="#1a2b1c">
-<title>Amabile — Gestão</title>
+<title>Amabile â€” GestÃ£o</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -24,7 +24,7 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:15px}
 
-/* ── HEADER ── */
+/* â”€â”€ HEADER â”€â”€ */
 .hdr{position:sticky;top:0;z-index:100;background:var(--g900);padding:14px 18px 12px;display:flex;align-items:center;justify-content:space-between}
 .hdr-logo{font-family:"Playfair Display",serif;font-size:21px;font-weight:400;color:var(--cream);letter-spacing:.03em}
 .hdr-logo em{color:var(--gold2);font-style:italic}
@@ -35,31 +35,31 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .install-bar{display:none;background:var(--gold);color:var(--white);padding:10px 18px;font-size:13px;align-items:center;justify-content:space-between;gap:10px}
 .install-bar button{background:var(--g900);color:var(--cream);border:none;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif}
 
-/* ── NAV ── */
+/* â”€â”€ NAV â”€â”€ */
 .nav{display:flex;background:var(--g900);border-top:1px solid rgba(255,255,255,.07);overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
 .nav-btn{flex-shrink:0;padding:11px 15px 9px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:rgba(247,244,239,.42);background:none;border:none;border-bottom:2.5px solid transparent;cursor:pointer;transition:color .18s,border-color .18s;white-space:nowrap;display:flex;align-items:center;gap:5px}
 .nav-btn.on{color:var(--cream);border-bottom-color:var(--gold2)}
 
-/* ── MAIN ── */
+/* â”€â”€ MAIN â”€â”€ */
 .main{padding:22px 16px 120px;max-width:500px;margin:0 auto}
 .panel{display:none}
 .panel.on{display:block;animation:up .2s ease}
 @keyframes up{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── TIPOGRAFIA ── */
+/* â”€â”€ TIPOGRAFIA â”€â”€ */
 .pg-title{font-family:"Playfair Display",serif;font-size:26px;font-weight:400;color:var(--g900);margin-bottom:3px;line-height:1.2}
 .pg-title em{font-style:italic;color:var(--g500)}
 .pg-sub{font-size:14px;color:var(--muted);margin-bottom:22px}
 .sec-title{font-family:"Playfair Display",serif;font-size:18px;font-weight:400;color:var(--g900);margin:20px 0 4px}
 .sec-sub{font-size:13px;color:var(--muted);margin-bottom:11px}
 
-/* ── CARDS ── */
+/* â”€â”€ CARDS â”€â”€ */
 .card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:14px;box-shadow:var(--sh1)}
 .card-title{font-family:"Playfair Display",serif;font-size:15px;font-weight:500;color:var(--g900);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .card-title::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
 
-/* ── FORM ── */
+/* â”€â”€ FORM â”€â”€ */
 .f{margin-bottom:13px}
 .f label{display:block;font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .f input,.f select,.f textarea{width:100%;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:12px 14px;font-family:"DM Sans",sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none}
@@ -69,12 +69,12 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
 
-/* ── NOME FIELD ── */
+/* â”€â”€ NOME FIELD â”€â”€ */
 .nome-field{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:var(--r2);font-size:16px;font-family:"DM Sans",sans-serif;color:var(--text);background:var(--white);outline:none;margin-bottom:18px;-webkit-appearance:none}
 .nome-field:focus{border-color:var(--g500)}
 .nome-field::placeholder{color:var(--light)}
 
-/* ── BUTTONS ── */
+/* â”€â”€ BUTTONS â”€â”€ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:12px 20px;font-family:"DM Sans",sans-serif;font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:none;border-radius:var(--r2);cursor:pointer;transition:all .15s}
 .btn-p{background:var(--g900);color:var(--cream);box-shadow:0 1px 4px rgba(26,43,28,.22)}
 .btn-p:hover{background:var(--g700)}
@@ -89,7 +89,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .del-btn{width:28px;height:28px;border-radius:50%;border:none;background:rgba(192,57,43,.09);color:var(--red);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .13s;flex-shrink:0}
 .del-btn:hover{background:var(--red);color:#fff}
 
-/* ── CHIPS ── */
+/* â”€â”€ CHIPS â”€â”€ */
 .chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
 .chip{padding:8px 15px;font-size:13px;font-weight:500;border:1.5px solid var(--border);border-radius:20px;background:var(--white);color:var(--muted);cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .13s;white-space:nowrap}
 .chip.on{background:var(--g900);color:var(--cream);border-color:var(--g900)}
@@ -98,7 +98,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .chip.on-planta{background:#EEEDFE;color:#2a2080;border-color:#8a86d0}
 .chip.sel{border-color:var(--gold);background:rgba(184,150,62,.08);color:var(--g900);box-shadow:0 0 0 2px rgba(184,150,62,.2)}
 
-/* ── RESULTADO ── */
+/* â”€â”€ RESULTADO â”€â”€ */
 .result{background:var(--g900);color:var(--cream);border-radius:var(--r);padding:20px;margin:16px 0}
 .result-lbl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,244,239,.45);margin-bottom:11px}
 .result-rows{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
@@ -107,7 +107,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .result-val{font-family:"Playfair Display",serif;font-size:40px;font-weight:400;color:var(--gold2);text-align:right;line-height:1}
 .result-val-lbl{font-size:11px;font-weight:500;color:rgba(247,244,239,.38);text-align:right;text-transform:uppercase;letter-spacing:.09em;margin-top:4px}
 
-/* ── FLORES GRID ── */
+/* â”€â”€ FLORES GRID â”€â”€ */
 .flores-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:14px}
 .flor-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:12px;box-shadow:var(--sh1);transition:border-color .13s,box-shadow .13s}
 .flor-card.has{border-color:var(--gold);box-shadow:0 0 0 2.5px rgba(184,150,62,.18)}
@@ -120,7 +120,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .sel-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .sel-tag{display:inline-flex;align-items:center;background:rgba(184,150,62,.10);color:var(--g900);font-size:12px;font-weight:500;padding:5px 11px;border-radius:20px;border:1px solid rgba(184,150,62,.25)}
 
-/* ── SAZONAL ── */
+/* â”€â”€ SAZONAL â”€â”€ */
 .saz-bar{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:15px 17px;margin-bottom:18px;box-shadow:var(--sh1)}
 .saz-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
 .saz-title{font-size:14px;font-weight:600;color:var(--text)}
@@ -134,26 +134,26 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .saz-pct.on{display:flex}
 .saz-pct input{width:70px;padding:9px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-family:"DM Sans",sans-serif;text-align:center;outline:none;background:var(--white);color:var(--text)}
 
-/* ── PICK BUTTONS (embalagem, mdo) ── */
+/* â”€â”€ PICK BUTTONS (embalagem, mdo) â”€â”€ */
 .pick-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .pick-btn{flex:1;min-width:75px;padding:12px 10px;border:1.5px solid var(--border);border-radius:var(--r2);background:var(--white);color:var(--muted);font-size:13px;font-weight:500;font-family:"DM Sans",sans-serif;cursor:pointer;text-align:center;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--sh1);transition:all .13s}
 .pick-btn:active{transform:scale(.97)}
 .pick-btn.sel{border-color:var(--gold);background:rgba(184,150,62,.07);color:var(--g900);box-shadow:0 0 0 2.5px rgba(184,150,62,.2)}
 .pick-sub{font-size:11px;font-weight:400;display:block;margin-top:3px;opacity:.65}
 
-/* ── EXTRA FIELDS ── */
+/* â”€â”€ EXTRA FIELDS â”€â”€ */
 .extra-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
 .extra-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:13px;box-shadow:var(--sh1)}
 .extra-lbl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px}
 .extra-input{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:15px;font-family:"DM Sans",sans-serif;color:var(--text);background:var(--cream);outline:none;-webkit-appearance:none;transition:border-color .13s}
 .extra-input:focus{border-color:var(--g500);background:var(--white)}
 
-/* ── SUBTABS ── */
+/* â”€â”€ SUBTABS â”€â”€ */
 .subtabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px}
 .subtab{flex:1;padding:10px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:none;border:none;border-bottom:2.5px solid transparent;margin-bottom:-2px;cursor:pointer;transition:all .15s;text-align:center}
 .subtab.on{color:var(--g900);border-bottom-color:var(--gold)}
 
-/* ── FOTO ── */
+/* â”€â”€ FOTO â”€â”€ */
 .foto-drop{width:100%;border:2px dashed var(--border2);border-radius:var(--r2);background:var(--white);min-height:96px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:10px;overflow:hidden}
 .foto-drop.has{border-style:solid;border-color:var(--gold);min-height:unset}
 .foto-ph{display:flex;flex-direction:column;align-items:center;gap:6px;padding:1.4rem;pointer-events:none}
@@ -162,7 +162,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 #calc-foto-img{width:100%;max-height:210px;object-fit:cover;display:block;pointer-events:none}
 .foto-rm{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;font-family:"DM Sans",sans-serif;margin-bottom:14px;text-decoration:underline;padding:5px 0;display:block}
 
-/* ── HIST CARDS ── */
+/* â”€â”€ HIST CARDS â”€â”€ */
 .hist-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:14px;display:flex;align-items:center;gap:11px;box-shadow:var(--sh1);margin-bottom:9px}
 .hist-foto{width:54px;height:54px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
 .hist-foto-ph{width:54px;height:54px;border-radius:8px;background:var(--cream2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid var(--border)}
@@ -177,13 +177,13 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .empty span{font-size:30px;display:block;margin-bottom:10px;opacity:.35}
 .empty p{font-size:14px}
 
-/* ── STATS ── */
+/* â”€â”€ STATS â”€â”€ */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:18px}
 .stat{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:15px 10px;text-align:center;box-shadow:var(--sh1)}
 .stat-n{font-family:"Playfair Display",serif;font-size:24px;font-weight:400;color:var(--g900);line-height:1}
 .stat-l{font-size:11px;font-weight:600;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
 
-/* ── INSUMOS SERVIÇOS ── */
+/* â”€â”€ INSUMOS SERVIÃ‡OS â”€â”€ */
 .insumo-row{display:flex;align-items:center;padding:13px 0;border-bottom:1px solid rgba(26,43,28,.06)}
 .insumo-row:last-child{border-bottom:none}
 .insumo-info{flex:1}
@@ -194,7 +194,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .insumo-qtd:focus{border-color:var(--gold)}
 .insumo-total{font-size:14px;font-weight:600;color:var(--g900);min-width:60px;text-align:right}
 
-/* ── PRODUTOS TABLE ── */
+/* â”€â”€ PRODUTOS TABLE â”€â”€ */
 .prod-table{width:100%;border-collapse:collapse}
 .prod-table th{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:9px 6px;border-bottom:2px solid var(--border);text-align:left}
 .prod-table td{padding:11px 6px;font-size:14px;border-bottom:1px solid rgba(26,43,28,.05);vertical-align:middle}
@@ -202,7 +202,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .prod-nome{font-weight:600;color:var(--text)}
 .prod-nome small{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:2px}
 
-/* ── ESTOQUE ── */
+/* â”€â”€ ESTOQUE â”€â”€ */
 .est-row{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);gap:13px}
 .est-row:last-child{border-bottom:none}
 .est-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
@@ -214,7 +214,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .est-qbtn{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);color:var(--g900);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:400;transition:all .13s;flex-shrink:0}
 .est-qbtn:hover{background:var(--g900);color:var(--white);border-color:var(--g900)}
 
-/* ── PEDIDOS ── */
+/* â”€â”€ PEDIDOS â”€â”€ */
 .ped-item{padding:16px 0;border-bottom:1px solid var(--border)}
 .ped-item:last-child{border-bottom:none}
 .ped-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px}
@@ -224,7 +224,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .ped-val{font-family:"Playfair Display",serif;font-size:20px;color:var(--g900);margin-right:auto}
 .ped-sel{padding:7px 10px;font-size:13px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);font-family:"DM Sans",sans-serif;color:var(--text);-webkit-appearance:none;outline:none}
 
-/* ── BADGE ── */
+/* â”€â”€ BADGE â”€â”€ */
 .badge{display:inline-block;padding:3px 9px;border-radius:7px;font-size:11px;font-weight:600;letter-spacing:.04em}
 .b-flor{background:#FBEAF0;color:#6a1832} .b-folha{background:#EAF3DE;color:#234010}
 .b-planta{background:#EEEDFE;color:#2a2080} .b-insumo{background:#E8F4F8;color:#124a60}
@@ -235,7 +235,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .badge-blue{background:rgba(41,128,185,.10);color:#0d3a6e}
 .badge-green{background:rgba(39,174,96,.12);color:#1a6b3a}
 
-/* ── CARRINHO (PEDIDO EM ABERTO) ── */
+/* â”€â”€ CARRINHO (PEDIDO EM ABERTO) â”€â”€ */
 .cart-bar{position:fixed;bottom:0;left:0;right:0;z-index:150;background:var(--g900);color:var(--cream);padding:14px 18px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -4px 20px rgba(26,43,28,.25)}
 .cart-bar.on{display:flex}
 .cart-info{flex:1}
@@ -247,7 +247,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .cart-btn-ver{background:rgba(255,255,255,.12);color:var(--cream)}
 .cart-btn-fechar{background:var(--gold);color:var(--white)}
 
-/* ── MODAL CARRINHO ── */
+/* â”€â”€ MODAL CARRINHO â”€â”€ */
 .cart-item-row{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid rgba(26,43,28,.06);gap:10px}
 .cart-item-row:last-child{border-bottom:none}
 .cart-item-info{flex:1}
@@ -255,18 +255,18 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .cart-item-det{font-size:12px;color:var(--muted);margin-top:2px}
 .cart-item-val{font-family:"Playfair Display",serif;font-size:18px;color:var(--g900);white-space:nowrap}
 
-/* ── PLANTAS & ORQUÍDEAS ── */
+/* â”€â”€ PLANTAS & ORQUÃDEAS â”€â”€ */
 .tipo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
 .tipo-btn{padding:18px 12px;border:1.5px solid var(--border);border-radius:var(--r);background:var(--white);color:var(--muted);font-size:14px;font-weight:500;font-family:"DM Sans",sans-serif;cursor:pointer;text-align:center;box-shadow:var(--sh1);transition:all .15s}
 .tipo-btn span{font-size:26px;display:block;margin-bottom:6px}
 .tipo-btn.on{background:var(--g900);color:var(--cream);border-color:var(--g900);box-shadow:var(--sh2)}
 
-/* ── TOOLBAR ── */
+/* â”€â”€ TOOLBAR â”€â”€ */
 .toolbar{display:flex;align-items:center;gap:9px;margin-bottom:15px;flex-wrap:wrap}
 .toolbar input{flex:1;min-width:130px;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r2);font-size:15px;font-family:"DM Sans",sans-serif;background:var(--white);color:var(--text);outline:none;-webkit-appearance:none}
 .toolbar input:focus{border-color:var(--g500)}
 
-/* ── MODAL ── */
+/* â”€â”€ MODAL â”€â”€ */
 .overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(15,25,16,.50);backdrop-filter:blur(5px);align-items:flex-end;justify-content:center}
 .overlay.on{display:flex}
 .modal{background:var(--cream);border-radius:20px 20px 0 0;padding:0 18px 44px;width:100%;max-width:500px;max-height:88vh;overflow-y:auto;animation:mup .26s cubic-bezier(.4,0,.2,1)}
@@ -274,7 +274,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .modal-handle{width:38px;height:4px;border-radius:2px;background:var(--border2);margin:14px auto 20px}
 .modal-title{font-family:"Playfair Display",serif;font-size:21px;font-weight:400;color:var(--g900);margin-bottom:18px}
 
-/* ── MARKUPS ── */
+/* â”€â”€ MARKUPS â”€â”€ */
 .mk-row{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid rgba(26,43,28,.06)}
 .mk-row:last-child{border-bottom:none}
 .mk-info{flex:1} .mk-cat{font-size:15px;font-weight:600} .mk-desc{font-size:12px;color:var(--muted);margin-top:2px}
@@ -283,7 +283,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 .mk-input:focus{border-color:var(--gold)}
 .mk-prev{font-size:12px;color:var(--g500);font-weight:600;min-width:56px;text-align:right}
 
-/* ── TOAST ── */
+/* â”€â”€ TOAST â”€â”€ */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--g900);color:var(--cream);padding:12px 22px;border-radius:30px;font-size:14px;font-weight:500;box-shadow:var(--sh2);z-index:999;opacity:0;pointer-events:none;transition:opacity .22s,bottom .22s;white-space:nowrap}
 .toast.on{opacity:1;bottom:96px}
 </style>
@@ -291,53 +291,53 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 <body>
 
 <div id="sync-bar" class="sync-bar"></div>
-<div id="offline-bar" class="offline-bar">🔌 Sem conexão — usando dados salvos</div>
+<div id="offline-bar" class="offline-bar">ðŸ”Œ Sem conexÃ£o â€” usando dados salvos</div>
 <div id="install-bar" class="install-bar">
-  <span>📱 Instale o app na tela inicial</span>
+  <span>ðŸ“± Instale o app na tela inicial</span>
   <div style="display:flex;gap:8px">
     <button onclick="installPWA()">Instalar</button>
-    <button onclick="R('install-bar').style.display='none'" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer">×</button>
+    <button onclick="R('install-bar').style.display='none'" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer">Ã—</button>
   </div>
 </div>
 
 <header class="hdr">
   <div class="hdr-logo">Amabile <em>flores</em></div>
   <div class="hdr-right">
-    <button class="hdr-sync" onclick="syncManual()">⟳ sync</button>
+    <button class="hdr-sync" onclick="syncManual()">âŸ³ sync</button>
   </div>
 </header>
 
 <nav class="nav">
-  <button class="nav-btn on" onclick="go('arranjos',this)">💐 Arranjos</button>
-  <button class="nav-btn" onclick="go('plantas',this)">🌿 Plantas</button>
-  <button class="nav-btn" onclick="go('servicos',this)">🔧 Serviços</button>
-  <button class="nav-btn" onclick="go('produtos',this)">📦 Produtos</button>
-  <button class="nav-btn" onclick="go('pedidos',this)">📋 Pedidos</button>
-  <button class="nav-btn" onclick="go('estoque',this)">📊 Estoque</button>
+  <button class="nav-btn on" onclick="go('arranjos',this)">ðŸ’ Arranjos</button>
+  <button class="nav-btn" onclick="go('plantas',this)">ðŸŒ¿ Plantas</button>
+  <button class="nav-btn" onclick="go('servicos',this)">ðŸ”§ ServiÃ§os</button>
+  <button class="nav-btn" onclick="go('produtos',this)">ðŸ“¦ Produtos</button>
+  <button class="nav-btn" onclick="go('pedidos',this)">ðŸ“‹ Pedidos</button>
+  <button class="nav-btn" onclick="go('estoque',this)">ðŸ“Š Estoque</button>
 </nav>
 
 <main class="main">
 
-<!-- ══════════ ARRANJOS ══════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â• ARRANJOS â•â•â•â•â•â•â•â•â•â• -->
 <div class="panel on" id="panel-arranjos">
   <div class="pg-title"><em>Calculadora</em> de Arranjos</div>
-  <div class="pg-sub">Selecione as flores e monte o orçamento</div>
+  <div class="pg-sub">Selecione as flores e monte o orÃ§amento</div>
 
   <div class="subtabs">
     <button class="subtab on" onclick="goSub('calc-novo','calc-hist',this)">Novo Arranjo</button>
-    <button class="subtab" onclick="goSub('calc-hist','calc-novo',this)">Histórico</button>
+    <button class="subtab" onclick="goSub('calc-hist','calc-novo',this)">HistÃ³rico</button>
   </div>
 
   <div id="calc-novo">
     <!-- Sazonal -->
     <div class="saz-bar">
       <div class="saz-top">
-        <div class="saz-title">Markup sazonal<small>Ajusta o preço de todas as hastes</small></div>
-        <span class="saz-badge" id="saz-badge">4× base</span>
+        <div class="saz-title">Markup sazonal<small>Ajusta o preÃ§o de todas as hastes</small></div>
+        <span class="saz-badge" id="saz-badge">4Ã— base</span>
       </div>
       <div class="chips" id="saz-chips">
         <button class="chip" data-saz="normal">Normal</button>
-        <button class="chip" data-saz="maes">Dia das Mães</button>
+        <button class="chip" data-saz="maes">Dia das MÃ£es</button>
         <button class="chip" data-saz="namorados">Namorados</button>
         <button class="chip" data-saz="custom">Personalizado</button>
       </div>
@@ -347,15 +347,15 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
       </div>
     </div>
 
-    <input class="nome-field" id="calc-nome" type="text" placeholder="Nome do arranjo (ex: Buquê 12 rosas)">
+    <input class="nome-field" id="calc-nome" type="text" placeholder="Nome do arranjo (ex: BuquÃª 12 rosas)">
 
     <div class="sec-title">Flores &amp; Folhagens</div>
-    <div class="sec-sub">Toque + / − para selecionar hastes</div>
+    <div class="sec-sub">Toque + / âˆ’ para selecionar hastes</div>
     <div class="chips" id="cat-chips">
       <button class="chip on" data-cat="todos">Todos</button>
-      <button class="chip" data-cat="flor">🌸 Flores</button>
-      <button class="chip" data-cat="folha">🍃 Folhagens</button>
-      <button class="chip" data-cat="planta">🌿 Plantas</button>
+      <button class="chip" data-cat="flor">ðŸŒ¸ Flores</button>
+      <button class="chip" data-cat="folha">ðŸƒ Folhagens</button>
+      <button class="chip" data-cat="planta">ðŸŒ¿ Plantas</button>
     </div>
     <div class="flores-grid" id="flores-grid"></div>
     <div class="sel-tags" id="sel-tags"></div>
@@ -368,17 +368,17 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 
     <div class="sec-title">Embalagem</div>
     <div class="pick-row" id="emb-row">
-      <button class="pick-btn" data-emb="nenhuma" data-val="0">Sem embalagem<span class="pick-sub">—</span></button>
-      <button class="pick-btn" data-emb="buque" data-val="15">Emb. buquê<span class="pick-sub">R$ 15</span></button>
+      <button class="pick-btn" data-emb="nenhuma" data-val="0">Sem embalagem<span class="pick-sub">â€”</span></button>
+      <button class="pick-btn" data-emb="buque" data-val="15">Emb. buquÃª<span class="pick-sub">R$ 15</span></button>
       <button class="pick-btn" data-emb="caixa" data-val="30">Caixa presente<span class="pick-sub">R$ 30</span></button>
       <button class="pick-btn" data-emb="cone" data-val="10">Cone kraft<span class="pick-sub">R$ 10</span></button>
     </div>
 
-    <div class="sec-title">Mão de obra</div>
+    <div class="sec-title">MÃ£o de obra</div>
     <div class="sec-sub">Calculada sobre o valor das flores</div>
     <div class="pick-row" id="mdo-row">
       <button class="pick-btn" data-mdo="nenhum">Sem M.O.</button>
-      <button class="pick-btn" data-mdo="buque">Buquê<span class="pick-sub">+20% flores</span></button>
+      <button class="pick-btn" data-mdo="buque">BuquÃª<span class="pick-sub">+20% flores</span></button>
       <button class="pick-btn" data-mdo="arranjo">Arranjo<span class="pick-sub">+30% flores</span></button>
     </div>
 
@@ -386,62 +386,62 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
       <div class="result-lbl">Resumo do arranjo</div>
       <div class="result-rows" id="calc-rows"></div>
       <div class="result-val" id="calc-total">R$ 0,00</div>
-      <div class="result-val-lbl">preço de venda sugerido</div>
+      <div class="result-val-lbl">preÃ§o de venda sugerido</div>
     </div>
 
     <div class="sec-title">Foto do arranjo</div>
     <input type="file" id="foto-input" accept="image/*" style="display:none">
     <div class="foto-drop" id="foto-drop">
-      <div id="foto-ph" class="foto-ph"><span>📷</span><p>Toque para adicionar foto</p></div>
+      <div id="foto-ph" class="foto-ph"><span>ðŸ“·</span><p>Toque para adicionar foto</p></div>
       <img id="foto-img" src="" alt="" style="display:none">
     </div>
     <button class="foto-rm" id="foto-rm" style="display:none">Remover foto</button>
 
     <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px">
-      <button class="btn btn-gold" onclick="calcAddCarrinho()">＋ Adicionar ao pedido</button>
-      <button class="btn btn-p" onclick="calcSalvarHist()">Salvar histórico</button>
+      <button class="btn btn-gold" onclick="calcAddCarrinho()">ï¼‹ Adicionar ao pedido</button>
+      <button class="btn btn-p" onclick="calcSalvarHist()">Salvar histÃ³rico</button>
       <button class="btn btn-o" onclick="calcLimpar()">Limpar</button>
     </div>
   </div>
 
   <div id="calc-hist" style="display:none">
     <div class="toolbar">
-      <input type="text" id="hist-busca" placeholder="Buscar arranjo…" oninput="renderHist()">
+      <input type="text" id="hist-busca" placeholder="Buscar arranjoâ€¦" oninput="renderHist()">
       <span id="hist-count" style="font-size:13px;color:var(--muted);white-space:nowrap"></span>
-      <button class="btn-danger btn" onclick="if(confirm('Limpar histórico?')){saveHist([]);renderHist();toast('Limpo')}">Limpar</button>
+      <button class="btn-danger btn" onclick="if(confirm('Limpar histÃ³rico?')){saveHist([]);renderHist();toast('Limpo')}">Limpar</button>
     </div>
     <div id="hist-list"></div>
   </div>
 </div>
 
-<!-- ══════════ PLANTAS & ORQUÍDEAS ══════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â• PLANTAS & ORQUÃDEAS â•â•â•â•â•â•â•â•â•â• -->
 <div class="panel" id="panel-plantas">
-  <div class="pg-title"><em>Plantas</em> &amp; Orquídeas</div>
+  <div class="pg-title"><em>Plantas</em> &amp; OrquÃ­deas</div>
   <div class="pg-sub">Monte vasos completos item por item</div>
 
   <div class="subtabs">
     <button class="subtab on" onclick="goSub('pl-calc','pl-hist',this)">Montar Vaso</button>
-    <button class="subtab" onclick="goSub('pl-hist','pl-calc',this)">Histórico</button>
+    <button class="subtab" onclick="goSub('pl-hist','pl-calc',this)">HistÃ³rico</button>
   </div>
 
   <div id="pl-calc">
     <div class="sec-title">Tipo</div>
     <div class="tipo-grid" id="pl-tipo-grid">
-      <button class="tipo-btn on" data-tipo="planta" onclick="setPlTipo('planta',this)"><span>🪴</span>Planta em Vaso</button>
-      <button class="tipo-btn" data-tipo="orquidea" onclick="setPlTipo('orquidea',this)"><span>🌸</span>Orquídea em Vaso</button>
+      <button class="tipo-btn on" data-tipo="planta" onclick="setPlTipo('planta',this)"><span>ðŸª´</span>Planta em Vaso</button>
+      <button class="tipo-btn" data-tipo="orquidea" onclick="setPlTipo('orquidea',this)"><span>ðŸŒ¸</span>OrquÃ­dea em Vaso</button>
     </div>
 
-    <input class="nome-field" id="pl-nome" type="text" placeholder="Nome do produto (ex: Kit Orquídea Branca)">
+    <input class="nome-field" id="pl-nome" type="text" placeholder="Nome do produto (ex: Kit OrquÃ­dea Branca)">
 
     <div class="sec-title">Componentes do vaso</div>
     <div class="sec-sub">Selecione cada item do banco de produtos</div>
 
-    <!-- Itens selecionáveis por categoria -->
+    <!-- Itens selecionÃ¡veis por categoria -->
     <div id="pl-componentes"></div>
 
-    <!-- Mão de obra -->
+    <!-- MÃ£o de obra -->
     <div class="card" style="margin-top:4px">
-      <div class="card-title">Mão de obra</div>
+      <div class="card-title">MÃ£o de obra</div>
       <div class="extra-grid" style="margin-bottom:0">
         <div class="extra-card">
           <div class="extra-lbl">Valor (R$)</div>
@@ -458,19 +458,19 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
       <div class="result-lbl">Resumo do vaso</div>
       <div class="result-rows" id="pl-rows"></div>
       <div class="result-val" id="pl-total">R$ 0,00</div>
-      <div class="result-val-lbl">preço de venda sugerido</div>
+      <div class="result-val-lbl">preÃ§o de venda sugerido</div>
     </div>
 
     <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px;margin-top:16px">
-      <button class="btn btn-gold" onclick="plAddCarrinho()">＋ Adicionar ao pedido</button>
-      <button class="btn btn-p" onclick="plSalvarHist()">Salvar histórico</button>
+      <button class="btn btn-gold" onclick="plAddCarrinho()">ï¼‹ Adicionar ao pedido</button>
+      <button class="btn btn-p" onclick="plSalvarHist()">Salvar histÃ³rico</button>
       <button class="btn btn-o" onclick="plLimpar()">Limpar</button>
     </div>
   </div>
 
   <div id="pl-hist" style="display:none">
     <div class="toolbar">
-      <input type="text" id="pl-hist-busca" placeholder="Buscar…" oninput="renderPlHist()">
+      <input type="text" id="pl-hist-busca" placeholder="Buscarâ€¦" oninput="renderPlHist()">
       <span id="pl-hist-count" style="font-size:13px;color:var(--muted)"></span>
       <button class="btn-danger btn" onclick="if(confirm('Limpar?')){savePlHist([]);renderPlHist();toast('Limpo')}">Limpar</button>
     </div>
@@ -478,48 +478,48 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
   </div>
 </div>
 
-<!-- ══════════ SERVIÇOS ══════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â• SERVIÃ‡OS â•â•â•â•â•â•â•â•â•â• -->
 <div class="panel" id="panel-servicos">
-  <div class="pg-title"><em>Serviço</em> de Plantio</div>
+  <div class="pg-title"><em>ServiÃ§o</em> de Plantio</div>
   <div class="pg-sub">Calcule o custo completo de plantio por vaso</div>
 
   <div class="subtabs">
     <button class="subtab on" onclick="goSub('srv-calc','srv-hist',this)">Calcular</button>
-    <button class="subtab" onclick="goSub('srv-hist','srv-calc',this)">Histórico</button>
+    <button class="subtab" onclick="goSub('srv-hist','srv-calc',this)">HistÃ³rico</button>
   </div>
 
   <div id="srv-calc">
-    <input class="nome-field" id="srv-nome" type="text" placeholder="Descrição (ex: Plantio fitônia vaso 20cm)">
+    <input class="nome-field" id="srv-nome" type="text" placeholder="DescriÃ§Ã£o (ex: Plantio fitÃ´nia vaso 20cm)">
 
-    <div class="sec-title">Mão de obra</div>
+    <div class="sec-title">MÃ£o de obra</div>
     <div class="extra-card" style="margin-bottom:14px">
       <div class="extra-lbl">Valor (R$)</div>
       <input class="extra-input" id="srv-mdo" type="number" min="0" step="1" placeholder="0,00" oninput="calcSrv()">
     </div>
 
     <div class="sec-title">Insumos</div>
-    <div class="sec-sub">Quantidade editável — ajuste conforme o vaso</div>
+    <div class="sec-sub">Quantidade editÃ¡vel â€” ajuste conforme o vaso</div>
     <div class="card" style="padding:8px 16px">
       <div id="srv-insumos"></div>
     </div>
 
     <div class="result" id="srv-result" style="display:none;margin-top:4px">
-      <div class="result-lbl">Resumo do serviço</div>
+      <div class="result-lbl">Resumo do serviÃ§o</div>
       <div class="result-rows" id="srv-rows"></div>
       <div class="result-val" id="srv-total">R$ 0,00</div>
-      <div class="result-val-lbl">preço de venda sugerido</div>
+      <div class="result-val-lbl">preÃ§o de venda sugerido</div>
     </div>
 
     <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px;margin-top:16px">
-      <button class="btn btn-gold" onclick="srvAddCarrinho()">＋ Adicionar ao pedido</button>
-      <button class="btn btn-p" onclick="srvSalvarHist()">Salvar histórico</button>
+      <button class="btn btn-gold" onclick="srvAddCarrinho()">ï¼‹ Adicionar ao pedido</button>
+      <button class="btn btn-p" onclick="srvSalvarHist()">Salvar histÃ³rico</button>
       <button class="btn btn-o" onclick="srvLimpar()">Limpar</button>
     </div>
   </div>
 
   <div id="srv-hist" style="display:none">
     <div class="toolbar">
-      <input type="text" id="srv-hist-busca" placeholder="Buscar…" oninput="renderSrvHist()">
+      <input type="text" id="srv-hist-busca" placeholder="Buscarâ€¦" oninput="renderSrvHist()">
       <span id="srv-hist-count" style="font-size:13px;color:var(--muted)"></span>
       <button class="btn-danger btn" onclick="if(confirm('Limpar?')){saveSrvHist([]);renderSrvHist();toast('Limpo')}">Limpar</button>
     </div>
@@ -527,13 +527,13 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
   </div>
 </div>
 
-<!-- ══════════ PRODUTOS ══════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â• PRODUTOS â•â•â•â•â•â•â•â•â•â• -->
 <div class="panel" id="panel-produtos">
   <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
     <div class="pg-title"><em>Banco de</em> Produtos</div>
     <button class="btn btn-gold btn-sm" onclick="abrirNovoProd()" style="margin-top:6px">+ Novo</button>
   </div>
-  <div class="pg-sub">Cadastro central · custos e calculadoras</div>
+  <div class="pg-sub">Cadastro central Â· custos e calculadoras</div>
 
   <div class="subtabs">
     <button class="subtab on" onclick="goProd('lista',this)">Produtos</button>
@@ -548,24 +548,24 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
     </div>
     <div class="chips" id="prod-cat-chips">
       <button class="chip on" data-pcat="todos" onclick="setProdCat('todos',this)">Todos</button>
-      <button class="chip" data-pcat="flor" onclick="setProdCat('flor',this)">🌸 Flores</button>
-      <button class="chip" data-pcat="folha" onclick="setProdCat('folha',this)">🍃 Folhagens</button>
-      <button class="chip" data-pcat="planta" onclick="setProdCat('planta',this)">🌿 Plantas</button>
-      <button class="chip" data-pcat="insumo" onclick="setProdCat('insumo',this)">🧪 Insumos</button>
-      <button class="chip" data-pcat="vaso" onclick="setProdCat('vaso',this)">🏺 Vasos</button>
+      <button class="chip" data-pcat="flor" onclick="setProdCat('flor',this)">ðŸŒ¸ Flores</button>
+      <button class="chip" data-pcat="folha" onclick="setProdCat('folha',this)">ðŸƒ Folhagens</button>
+      <button class="chip" data-pcat="planta" onclick="setProdCat('planta',this)">ðŸŒ¿ Plantas</button>
+      <button class="chip" data-pcat="insumo" onclick="setProdCat('insumo',this)">ðŸ§ª Insumos</button>
+      <button class="chip" data-pcat="vaso" onclick="setProdCat('vaso',this)">ðŸº Vasos</button>
     </div>
-    <div class="toolbar"><input type="text" id="prod-busca" placeholder="Buscar produto…" oninput="renderProdutos()"></div>
+    <div class="toolbar"><input type="text" id="prod-busca" placeholder="Buscar produtoâ€¦" oninput="renderProdutos()"></div>
     <div class="card" style="padding:8px 14px;overflow-x:auto">
       <table class="prod-table">
-        <thead><tr><th>Produto</th><th style="text-align:right">Custo</th><th style="text-align:right">Ações</th></tr></thead>
+        <thead><tr><th>Produto</th><th style="text-align:right">Custo</th><th style="text-align:right">AÃ§Ãµes</th></tr></thead>
         <tbody id="prod-tbody"></tbody>
       </table>
     </div>
-    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:6px">💡 Edite custos aqui — atualiza todas as calculadoras</p>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:6px">ðŸ’¡ Edite custos aqui â€” atualiza todas as calculadoras</p>
   </div>
 
   <div id="prod-panel-markup" style="display:none">
-    <p style="font-size:14px;color:var(--muted);margin-bottom:18px;line-height:1.6">Defina o multiplicador por categoria. Preço de venda = <strong>custo × markup</strong>.</p>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:18px;line-height:1.6">Defina o multiplicador por categoria. PreÃ§o de venda = <strong>custo Ã— markup</strong>.</p>
     <div class="card" style="padding:8px 16px"><div id="mk-lista"></div></div>
     <div style="display:flex;gap:9px;margin-top:6px">
       <button class="btn btn-p btn-full" onclick="salvarMarkups()">Salvar markups</button>
@@ -574,13 +574,13 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
   </div>
 </div>
 
-<!-- ══════════ PEDIDOS ══════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â• PEDIDOS â•â•â•â•â•â•â•â•â•â• -->
 <div class="panel" id="panel-pedidos">
   <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
     <div class="pg-title"><em>Pedidos</em></div>
     <button class="btn btn-gold btn-sm" onclick="openM('m-pedido')" style="margin-top:6px">+ Novo</button>
   </div>
-  <div class="pg-sub">Encomendas e orçamentos da loja</div>
+  <div class="pg-sub">Encomendas e orÃ§amentos da loja</div>
   <div class="stats">
     <div class="stat"><div class="stat-n" id="ped-total">0</div><div class="stat-l">Total</div></div>
     <div class="stat"><div class="stat-n" id="ped-pend" style="color:var(--orange)">0</div><div class="stat-l">Pendentes</div></div>
@@ -589,29 +589,29 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
   <div class="card" style="padding:4px 14px"><div id="ped-lista"></div></div>
 </div>
 
-<!-- ══════════ ESTOQUE ══════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â• ESTOQUE â•â•â•â•â•â•â•â•â•â• -->
 <div class="panel" id="panel-estoque">
   <div class="pg-title"><em>Estoque</em></div>
   <div class="pg-sub">Atualizado via banco de produtos</div>
   <div class="stats">
     <div class="stat"><div class="stat-n" id="est-total">0</div><div class="stat-l">Itens</div></div>
-    <div class="stat"><div class="stat-n" id="est-low" style="color:var(--orange)">0</div><div class="stat-l">Atenção</div></div>
+    <div class="stat"><div class="stat-n" id="est-low" style="color:var(--orange)">0</div><div class="stat-l">AtenÃ§Ã£o</div></div>
     <div class="stat"><div class="stat-n" id="est-out" style="color:var(--red)">0</div><div class="stat-l">Esgotado</div></div>
   </div>
   <div class="chips" id="est-cat-chips">
     <button class="chip on" data-ecat="todos" onclick="setEstCat('todos',this)">Todos</button>
-    <button class="chip" data-ecat="flor" onclick="setEstCat('flor',this)">🌸 Flores</button>
-    <button class="chip" data-ecat="folha" onclick="setEstCat('folha',this)">🍃 Folhagens</button>
-    <button class="chip" data-ecat="planta" onclick="setEstCat('planta',this)">🌿 Plantas</button>
-    <button class="chip" data-ecat="insumo" onclick="setEstCat('insumo',this)">🧪 Insumos</button>
-    <button class="chip" data-ecat="vaso" onclick="setEstCat('vaso',this)">🏺 Vasos</button>
+    <button class="chip" data-ecat="flor" onclick="setEstCat('flor',this)">ðŸŒ¸ Flores</button>
+    <button class="chip" data-ecat="folha" onclick="setEstCat('folha',this)">ðŸƒ Folhagens</button>
+    <button class="chip" data-ecat="planta" onclick="setEstCat('planta',this)">ðŸŒ¿ Plantas</button>
+    <button class="chip" data-ecat="insumo" onclick="setEstCat('insumo',this)">ðŸ§ª Insumos</button>
+    <button class="chip" data-ecat="vaso" onclick="setEstCat('vaso',this)">ðŸº Vasos</button>
   </div>
   <div class="card" style="padding:4px 14px"><div id="est-lista"></div></div>
 </div>
 
 </main>
 
-<!-- ══════════ CARRINHO BAR ══════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â• CARRINHO BAR â•â•â•â•â•â•â•â•â•â• -->
 <div class="cart-bar" id="cart-bar">
   <div class="cart-info">
     <div class="cart-label">Pedido em aberto</div>
@@ -624,7 +624,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
   </div>
 </div>
 
-<!-- ══════════ MODAIS ══════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â• MODAIS â•â•â•â•â•â•â•â•â•â• -->
 
 <!-- Modal: ver carrinho -->
 <div class="overlay" id="m-cart" onclick="closeM(event,'m-cart')">
@@ -658,7 +658,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
       </select>
     </div>
     <div class="f"><label>Data de entrega</label><input type="date" id="fech-data"></div>
-    <div class="f"><label>Observações</label><textarea id="fech-obs" placeholder="Observações do pedido"></textarea></div>
+    <div class="f"><label>ObservaÃ§Ãµes</label><textarea id="fech-obs" placeholder="ObservaÃ§Ãµes do pedido"></textarea></div>
     <div style="background:var(--g100);border-radius:var(--r2);padding:14px;margin-bottom:16px">
       <div style="font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:600">Total do pedido</div>
       <div class="result-val" id="fech-total" style="font-size:32px;color:var(--g900)">R$ 0,00</div>
@@ -677,31 +677,31 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
     <div class="g2">
       <div class="f"><label>Categoria</label>
         <select id="prd-cat">
-          <option value="flor">🌸 Flor</option>
-          <option value="folha">🍃 Folhagem</option>
-          <option value="planta">🌿 Planta</option>
-          <option value="insumo">🧪 Insumo</option>
-          <option value="vaso">🏺 Vaso</option>
-          <option value="outro">📦 Outro</option>
+          <option value="flor">ðŸŒ¸ Flor</option>
+          <option value="folha">ðŸƒ Folhagem</option>
+          <option value="planta">ðŸŒ¿ Planta</option>
+          <option value="insumo">ðŸ§ª Insumo</option>
+          <option value="vaso">ðŸº Vaso</option>
+          <option value="outro">ðŸ“¦ Outro</option>
         </select>
       </div>
       <div class="f"><label>Unidade</label>
         <select id="prd-unidade">
           <option value="un">un</option><option value="haste">haste</option>
           <option value="kg">kg</option><option value="cx">cx</option>
-          <option value="m2">m²</option><option value="L">litro</option>
+          <option value="m2">mÂ²</option><option value="L">litro</option>
         </select>
       </div>
     </div>
-    <div class="f"><label>Custo unitário (R$)</label><input type="number" id="prd-custo" placeholder="0,00" min="0" step="0.01"></div>
-    <div class="f"><label>Alerta estoque mínimo</label><input type="number" id="prd-min" placeholder="5" min="0"></div>
+    <div class="f"><label>Custo unitÃ¡rio (R$)</label><input type="number" id="prd-custo" placeholder="0,00" min="0" step="0.01"></div>
+    <div class="f"><label>Alerta estoque mÃ­nimo</label><input type="number" id="prd-min" placeholder="5" min="0"></div>
     <div class="f"><label>Incluir nas calculadoras</label>
       <select id="prd-calc">
-        <option value="nenhuma">Nenhuma — só banco de dados</option>
+        <option value="nenhuma">Nenhuma â€” sÃ³ banco de dados</option>
         <option value="arranjos">Calculadora de Arranjos (flores/hastes)</option>
-        <option value="servicos">Calculadora de Serviços (insumos de plantio)</option>
-        <option value="plantas">Plantas &amp; Orquídeas (vasos, plantas, insumos)</option>
-        <option value="ambas">Arranjos + Serviços</option>
+        <option value="servicos">Calculadora de ServiÃ§os (insumos de plantio)</option>
+        <option value="plantas">Plantas &amp; OrquÃ­deas (vasos, plantas, insumos)</option>
+        <option value="ambas">Arranjos + ServiÃ§os</option>
         <option value="todas">Todas as calculadoras</option>
       </select>
     </div>
@@ -718,7 +718,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
       <div class="f"><label>Cliente</label><input type="text" id="ped-cliente" placeholder="Nome"></div>
       <div class="f"><label>Telefone</label><input type="tel" id="ped-tel" placeholder="(11) 9____-____"></div>
     </div>
-    <div class="f"><label>Descrição</label><textarea id="ped-desc" placeholder="Descreva o pedido"></textarea></div>
+    <div class="f"><label>DescriÃ§Ã£o</label><textarea id="ped-desc" placeholder="Descreva o pedido"></textarea></div>
     <div class="g2">
       <div class="f"><label>Valor (R$)</label><input type="number" id="ped-valor" min="0" step="0.01" placeholder="0,00"></div>
       <div class="f"><label>Entrega</label><input type="date" id="ped-data"></div>
@@ -730,7 +730,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
       <div class="f"><label>Status</label>
         <select id="ped-status">
           <option value="pendente">Pendente</option><option value="confirmado">Confirmado</option>
-          <option value="producao">Em produção</option><option value="entregue">Entregue</option>
+          <option value="producao">Em produÃ§Ã£o</option><option value="entregue">Entregue</option>
           <option value="cancelado">Cancelado</option>
         </select>
       </div>
@@ -742,9 +742,9 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 <div class="toast" id="toast-el"></div>
 
 <script>
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // UTILS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var R=function(id){return document.getElementById(id);};
 var fmt=function(n){return 'R$ '+(parseFloat(n)||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});};
 var fmtN=function(n){return (parseFloat(n)||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});};
@@ -779,12 +779,12 @@ function goSub(showId,hideId,el){
   if(showId==='srv-hist') renderSrvHist();
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // GOOGLE SHEETS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var GS_URL='https://script.google.com/macros/s/AKfycbylxg2XRLUNahb1ySyZELEXv70Q2l7id9HV4S0E01Qk0UmhKcnvEvxJo_4AvVrWtvU/exec';
 
-function showSyncBar(msg){var b=R('sync-bar');if(b){b.textContent='⟳ '+msg;b.style.display='block';}}
+function showSyncBar(msg){var b=R('sync-bar');if(b){b.textContent='âŸ³ '+msg;b.style.display='block';}}
 function hideSyncBar(){var b=R('sync-bar');if(b)b.style.display='none';}
 
 function syncProdutosDoSheets(cb){
@@ -827,14 +827,14 @@ function syncProdutosToSheets(){
 
 function syncManual(){
   syncProdutosDoSheets(function(ok){
-    if(ok){renderProdutos();renderEstoque();buildFloresGrid();buildSrvInsumos();buildPlComponentes();toast('Produtos atualizados ✓');}
-    else{toast('Sem conexão — dados locais');}
+    if(ok){renderProdutos();renderEstoque();buildFloresGrid();buildSrvInsumos();buildPlComponentes();toast('Produtos atualizados âœ“');}
+    else{toast('Sem conexÃ£o â€” dados locais');}
   });
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // BANCO DE PRODUTOS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var PKEY='amabile_prod_v2';
 var prodCatAtiva='todos';
 
@@ -977,9 +977,9 @@ function renderProdutos(){
   tb.innerHTML=rows.join('');
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // ESTOQUE
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var estCatAtiva='todos';
 function setEstCat(cat,el){
   estCatAtiva=cat;
@@ -1013,16 +1013,16 @@ function renderEstoque(){
   el.innerHTML=rows.join('');
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MARKUPS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var MK_KEY='amabile_markups_v1';
 var MK_DEF={
-  flor:{lbl:'Flores',emoji:'🌸',markup:4.0,desc:'Rosas, Girassol, Lirio...'},
-  folha:{lbl:'Folhagens',emoji:'🍃',markup:4.0,desc:'Eucalipto, Ruscus, Musgo...'},
-  planta:{lbl:'Plantas',emoji:'🌿',markup:2.5,desc:'Orquidea, e demais plantas...'},
-  insumo:{lbl:'Insumos',emoji:'🧪',markup:2.0,desc:'Substrato, argila, manta...'},
-  vaso:{lbl:'Vasos & Cachepots',emoji:'🏺',markup:2.0,desc:'Vasos, cachepots...'}
+  flor:{lbl:'Flores',emoji:'ðŸŒ¸',markup:4.0,desc:'Rosas, Girassol, Lirio...'},
+  folha:{lbl:'Folhagens',emoji:'ðŸƒ',markup:4.0,desc:'Eucalipto, Ruscus, Musgo...'},
+  planta:{lbl:'Plantas',emoji:'ðŸŒ¿',markup:2.5,desc:'Orquidea, e demais plantas...'},
+  insumo:{lbl:'Insumos',emoji:'ðŸ§ª',markup:2.0,desc:'Substrato, argila, manta...'},
+  vaso:{lbl:'Vasos & Cachepots',emoji:'ðŸº',markup:2.0,desc:'Vasos, cachepots...'}
 };
 var mkVals={};
 
@@ -1047,7 +1047,7 @@ function resetMarkups(){
 }
 function updMkPreview(cat){
   var inp=R('mk-inp-'+cat); var prev=R('mk-prev-'+cat);
-  if(inp&&prev) prev.textContent=(parseFloat(inp.value)||0).toFixed(1)+'×';
+  if(inp&&prev) prev.textContent=(parseFloat(inp.value)||0).toFixed(1)+'Ã—';
 }
 function renderMarkups(){
   var el=R('mk-lista'); if(!el)return;
@@ -1057,8 +1057,8 @@ function renderMarkups(){
       +'<div class="mk-info"><div class="mk-cat">'+c.emoji+' '+c.lbl+'</div><div class="mk-desc">'+c.desc+'</div></div>'
       +'<div class="mk-right">'
       +'<input class="mk-input" id="mk-inp-'+cat+'" type="number" min="1" max="20" step="0.1" value="'+cur.toFixed(1)+'" oninput="updMkPreview(\''+cat+'\')">'
-      +'<span style="font-size:14px;color:var(--muted);font-weight:500">×</span>'
-      +'<span class="mk-prev" id="mk-prev-'+cat+'">'+cur.toFixed(1)+'×</span>'
+      +'<span style="font-size:14px;color:var(--muted);font-weight:500">Ã—</span>'
+      +'<span class="mk-prev" id="mk-prev-'+cat+'">'+cur.toFixed(1)+'Ã—</span>'
       +'</div></div>';
   }).join('');
 }
@@ -1071,9 +1071,9 @@ function goProd(id,el){
   if(id==='markup') renderMarkups();
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CARRINHO UNIVERSAL
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var carrinho=[];
 
 function updateCartBar(){
@@ -1090,7 +1090,7 @@ function addToCart(item){
   carrinho.push(item);
   updateCartBar();
   renderCartModal();
-  toast(item.nome+' adicionado ao pedido ✓');
+  toast(item.nome+' adicionado ao pedido âœ“');
 }
 
 function removeFromCart(idx){
@@ -1136,13 +1136,13 @@ function fecharPedido(){
   cartLimpar();
   closeModal('m-fechar');
   R('fech-cliente').value=''; R('fech-obs').value='';
-  toast('Pedido fechado: '+fmt(total)+' ✓');
+  toast('Pedido fechado: '+fmt(total)+' âœ“');
   go('pedidos',document.querySelector('[onclick="go(\'pedidos\',this)"]'));
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CALCULADORA DE ARRANJOS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var HIST_KEY='amabile_hist_v3';
 var sazTipo='normal',embTipo='nenhuma',embVal=0,mdoTipo='nenhum';
 var qtds={},fotoB64=null,catAtiva='todos';
@@ -1300,7 +1300,7 @@ function renderHist(){
     var fl=r.itens.map(function(i){return i.qty+'x '+i.nome.split(' ').slice(0,2).join(' ');}).join(', ');
     var foto=r.foto?'<img class="hist-foto" src="'+r.foto+'" alt="">':'<div class="hist-foto-ph">&#128144;</div>';
     return '<div class="hist-card">'+foto+'<div class="hist-info"><div class="hist-nome">'+r.nome+'</div>'
-      +'<div class="hist-det">'+fl+'</div><div class="hist-meta">'+r.data+(r.sazExtra>0?' · +'+r.sazExtra+'% sazonal':'')+'</div></div>'
+      +'<div class="hist-det">'+fl+'</div><div class="hist-meta">'+r.data+(r.sazExtra>0?' Â· +'+r.sazExtra+'% sazonal':'')+'</div></div>'
       +'<div class="hist-price">'+fmt(r.total)+'</div>'
       +'<button class="hist-del" data-hid="'+r.id+'">&#215;</button></div>';
   }).join('');
@@ -1332,9 +1332,9 @@ R('foto-input').addEventListener('change',function(){
 });
 function rmFoto(){fotoB64=null;R('foto-img').src='';R('foto-img').style.display='none';R('foto-ph').style.display='flex';R('foto-drop').classList.remove('has');R('foto-rm').style.display='none';R('foto-input').value='';}
 
-// ═══════════════════════════════════════════════
-// PLANTAS & ORQUÍDEAS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// PLANTAS & ORQUÃDEAS
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var PL_HIST_KEY='amabile_pl_hist_v1';
 var plTipo='planta';
 var plSel={};  // {prodId: qtd}
@@ -1355,7 +1355,7 @@ var PL_CATS={
 };
 var PL_CAT_LABELS={
   vaso:'Vaso / Cachepot',
-  planta: {planta:'Planta', orquidea:'Orquídea'},
+  planta: {planta:'Planta', orquidea:'OrquÃ­dea'},
   insumo:'Insumos & Acabamento'
 };
 
@@ -1477,7 +1477,7 @@ function renderPlHist(){
   if(!h.length){el.innerHTML='<div class="empty"><span>&#127804;</span><p>Nenhum registro</p></div>';return;}
   el.innerHTML=h.map(function(r){
     var det=r.itens.map(function(i){return i.qty+'x '+i.nome.split(' ')[0];}).join(', ');
-    var ico=r.tipo==='orquidea'?'🌸':'🪴';
+    var ico=r.tipo==='orquidea'?'ðŸŒ¸':'ðŸª´';
     return '<div class="hist-card"><div class="hist-foto-ph">'+ico+'</div>'
       +'<div class="hist-info"><div class="hist-nome">'+r.nome+'</div>'
       +'<div class="hist-det">'+det+'</div><div class="hist-meta">'+r.data+'</div></div>'
@@ -1491,9 +1491,9 @@ R('pl-hist-list').addEventListener('click',function(e){
   savePlHist(loadPlHist().filter(function(r){return r.id!==id;})); renderPlHist();
 });
 
-// ═══════════════════════════════════════════════
-// SERVIÇOS (só plantio agora)
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// SERVIÃ‡OS (sÃ³ plantio agora)
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var SRV_HIST_KEY='amabile_srv_v2';
 var srvInsumoQtds={};
 
@@ -1505,9 +1505,9 @@ function buildSrvInsumos(){
   var el=R('srv-insumos'); if(!el)return;
   if(!prods.length){
     el.innerHTML='<div style="padding:20px;text-align:center;color:var(--muted);font-size:14px">'
-      +'<div style="font-size:28px;margin-bottom:8px">🧪</div>'
+      +'<div style="font-size:28px;margin-bottom:8px">ðŸ§ª</div>'
       +'Nenhum insumo cadastrado.<br>'
-      +'<span style="font-size:13px">Va em <strong>Produtos → Novo</strong> e selecione "Calculadora de Servicos".</span></div>';
+      +'<span style="font-size:13px">Va em <strong>Produtos â†’ Novo</strong> e selecione "Calculadora de Servicos".</span></div>';
     return;
   }
   el.innerHTML=prods.map(function(p){
@@ -1599,7 +1599,7 @@ function renderSrvHist(){
   if(!h.length){el.innerHTML='<div class="empty"><span>&#127807;</span><p>Nenhum registro</p></div>';return;}
   el.innerHTML=h.map(function(r){
     var det=r.itens.map(function(i){return i.nome.split(' ')[0];}).join(', ');
-    return '<div class="hist-card"><div class="hist-foto-ph">🔧</div>'
+    return '<div class="hist-card"><div class="hist-foto-ph">ðŸ”§</div>'
       +'<div class="hist-info"><div class="hist-nome">'+r.nome+'</div>'
       +'<div class="hist-det">'+det+'</div><div class="hist-meta">'+r.data+'</div></div>'
       +'<div class="hist-price">'+fmt(r.total)+'</div>'
@@ -1612,9 +1612,9 @@ R('srv-hist-list').addEventListener('click',function(e){
   saveSrvHist(loadSrvHist().filter(function(r){return r.id!==id;})); renderSrvHist();
 });
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // PEDIDOS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var PED_KEY='amabile_ped_v2';
 var STATUS={pendente:{lbl:'Pendente',cls:'badge-orange'},confirmado:{lbl:'Confirmado',cls:'badge-blue'},
   producao:{lbl:'Em producao',cls:'badge-blue'},entregue:{lbl:'Entregue',cls:'badge-green'},cancelado:{lbl:'Cancelado',cls:'badge-red'}};
@@ -1663,11 +1663,11 @@ function renderPedidos(){
   if(!arr.length){el.innerHTML='<div class="empty"><span>&#128203;</span><p>Nenhum pedido</p></div>';return;}
   el.innerHTML=arr.map(function(p){
     var sc=STATUS[p.status]||STATUS.pendente;
-    var df=p.data?new Date(p.data+'T12:00:00').toLocaleDateString('pt-BR'):'—';
+    var df=p.data?new Date(p.data+'T12:00:00').toLocaleDateString('pt-BR'):'â€”';
     var opts=Object.entries(STATUS).map(function(e){return '<option value="'+e[0]+'"'+(p.status===e[0]?' selected':'')+'>'+e[1].lbl+'</option>';}).join('');
     return '<div class="ped-item"><div class="ped-top"><div>'
       +'<div class="ped-cliente">'+p.cliente+'</div>'
-      +'<div class="ped-data">'+p.canal+' · '+df+'</div>'
+      +'<div class="ped-data">'+p.canal+' Â· '+df+'</div>'
       +'</div><span class="badge '+sc.cls+'">'+sc.lbl+'</span></div>'
       +'<div class="ped-desc">'+(p.desc||'Sem descricao')+'</div>'
       +'<div class="ped-bot"><div class="ped-val">'+fmt(p.valor)+'</div>'
@@ -1677,9 +1677,9 @@ function renderPedidos(){
   }).join('');
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // PWA
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',function(e){
   e.preventDefault(); deferredPrompt=e; R('install-bar').style.display='flex';
@@ -1693,9 +1693,9 @@ function installPWA(){
 window.addEventListener('offline',function(){R('offline-bar').style.display='block';});
 window.addEventListener('online',function(){R('offline-bar').style.display='none';});
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // INIT
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 mkVals=loadMarkups();
 setSazonal('normal');
 buildFloresGrid();
