@@ -417,7 +417,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 <!-- ══════════ PLANTAS & ORQUÍDEAS ══════════ -->
 <div class="panel" id="panel-plantas">
   <div class="pg-title"><em>Plantas</em> &amp; Orquídeas</div>
-  <div class="pg-sub">Monte vasos completos item por item</div>
+  <div class="pg-sub">Monte vasos completos — selecione e adicione ao pedido</div>
 
   <div class="subtabs">
     <button class="subtab on" onclick="goSub('pl-calc','pl-hist',this)">Montar Vaso</button>
@@ -425,43 +425,65 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
   </div>
 
   <div id="pl-calc">
+    <!-- Tipo -->
     <div class="sec-title">Tipo</div>
-    <div class="tipo-grid" id="pl-tipo-grid">
+    <div class="tipo-grid">
       <button class="tipo-btn on" data-tipo="planta" onclick="setPlTipo('planta',this)"><span>🪴</span>Planta em Vaso</button>
       <button class="tipo-btn" data-tipo="orquidea" onclick="setPlTipo('orquidea',this)"><span>🌸</span>Orquídea em Vaso</button>
     </div>
 
-    <input class="nome-field" id="pl-nome" type="text" placeholder="Nome do produto (ex: Kit Orquídea Branca)">
+    <input class="nome-field" id="pl-nome" type="text" placeholder="Nome do produto (ex: Kit Orquídea Branca P)">
 
-    <div class="sec-title">Componentes do vaso</div>
-    <div class="sec-sub">Selecione cada item do banco de produtos</div>
+    <!-- SELETOR EM CASCATA -->
+    <!-- Passo 1: Planta/Orquídea -->
+    <div class="sec-title">1. Selecione a planta</div>
+    <div class="f">
+      <label id="pl-planta-lbl">Planta</label>
+      <select id="pl-sel-planta" onchange="onPlantaSel()" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r2);font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);outline:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%231a2b1c' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px">
+        <option value="">-- Selecione --</option>
+      </select>
+    </div>
+    <div id="pl-planta-info" style="display:none;background:var(--g100);border-radius:var(--r2);padding:12px 14px;margin-bottom:14px;font-size:14px;color:var(--g900)"></div>
 
-    <!-- Itens selecionáveis por categoria -->
-    <div id="pl-componentes"></div>
+    <!-- Passo 2: Vaso -->
+    <div class="sec-title">2. Selecione o vaso</div>
+    <div class="f">
+      <label>Vaso / Cachepot</label>
+      <select id="pl-sel-vaso" onchange="onVasoSel()" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r2);font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);outline:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%231a2b1c' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px">
+        <option value="">-- Selecione --</option>
+      </select>
+    </div>
+    <div id="pl-vaso-info" style="display:none;background:var(--g100);border-radius:var(--r2);padding:12px 14px;margin-bottom:14px;font-size:14px;color:var(--g900)"></div>
 
-    <!-- Mão de obra -->
-    <div class="card" style="margin-top:4px">
-      <div class="card-title">Mão de obra</div>
-      <div class="extra-grid" style="margin-bottom:0">
-        <div class="extra-card">
-          <div class="extra-lbl">Valor (R$)</div>
-          <input class="extra-input" id="pl-mdo" type="number" min="0" step="1" placeholder="0,00" oninput="calcPlantas()">
-        </div>
-        <div class="extra-card">
-          <div class="extra-lbl">Extras (R$)</div>
-          <input class="extra-input" id="pl-extra" type="number" min="0" step="0.5" placeholder="0,00" oninput="calcPlantas()">
-        </div>
+    <!-- Passo 3: Insumos -->
+    <div class="sec-title">3. Insumos &amp; Acabamento</div>
+    <div class="sec-sub">Ajuste as quantidades conforme o vaso</div>
+    <div class="card" style="padding:8px 16px" id="pl-insumos-card">
+      <div id="pl-insumos-lista">
+        <div style="padding:16px;text-align:center;color:var(--muted);font-size:13px">Selecione a planta e o vaso primeiro</div>
       </div>
     </div>
 
-    <div class="result" id="pl-result" style="display:none;margin-top:16px">
+    <!-- Mão de obra e extras -->
+    <div class="extra-grid" style="margin-top:4px">
+      <div class="extra-card">
+        <div class="extra-lbl">Mão de obra (R$)</div>
+        <input class="extra-input" id="pl-mdo" type="number" min="0" step="1" placeholder="0,00" oninput="calcPlantas()">
+      </div>
+      <div class="extra-card">
+        <div class="extra-lbl">Extras (R$)</div>
+        <input class="extra-input" id="pl-extra" type="number" min="0" step="0.5" placeholder="0,00" oninput="calcPlantas()">
+      </div>
+    </div>
+
+    <div class="result" id="pl-result" style="display:none;margin-top:14px">
       <div class="result-lbl">Resumo do vaso</div>
       <div class="result-rows" id="pl-rows"></div>
       <div class="result-val" id="pl-total">R$ 0,00</div>
       <div class="result-val-lbl">preço de venda sugerido</div>
     </div>
 
-    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px;margin-top:16px">
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 24px">
       <button class="btn btn-gold" onclick="plAddCarrinho()">＋ Adicionar ao pedido</button>
       <button class="btn btn-p" onclick="plSalvarHist()">Salvar histórico</button>
       <button class="btn btn-o" onclick="plLimpar()">Limpar</button>
@@ -480,8 +502,8 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
 
 <!-- ══════════ SERVIÇOS ══════════ -->
 <div class="panel" id="panel-servicos">
-  <div class="pg-title"><em>Serviço</em> de Plantio</div>
-  <div class="pg-sub">Calcule o custo completo de plantio por vaso</div>
+  <div class="pg-title"><em>Cardápio</em> de Serviços</div>
+  <div class="pg-sub">Selecione os serviços e ajuste os insumos</div>
 
   <div class="subtabs">
     <button class="subtab on" onclick="goSub('srv-calc','srv-hist',this)">Calcular</button>
@@ -489,17 +511,19 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
   </div>
 
   <div id="srv-calc">
-    <input class="nome-field" id="srv-nome" type="text" placeholder="Descrição (ex: Plantio fitônia vaso 20cm)">
+    <input class="nome-field" id="srv-nome" type="text" placeholder="Cliente ou descrição (ex: Repotagem fitônia)">
 
-    <div class="sec-title">Mão de obra</div>
-    <div class="extra-card" style="margin-bottom:14px">
-      <div class="extra-lbl">Valor (R$)</div>
-      <input class="extra-input" id="srv-mdo" type="number" min="0" step="1" placeholder="0,00" oninput="calcSrv()">
+    <!-- Cardápio de serviços (mão de obra) -->
+    <div class="sec-title">Serviços</div>
+    <div class="sec-sub">Selecione um ou mais — preços configuráveis em Produtos → Serviços</div>
+    <div class="card" style="padding:8px 16px" id="srv-menu-card">
+      <div id="srv-menu-lista"></div>
     </div>
 
-    <div class="sec-title">Insumos</div>
-    <div class="sec-sub">Quantidade editável — ajuste conforme o vaso</div>
-    <div class="card" style="padding:8px 16px">
+    <!-- Insumos editáveis -->
+    <div class="sec-title" id="srv-insumos-titulo" style="display:none">Insumos utilizados</div>
+    <div class="sec-sub" id="srv-insumos-sub" style="display:none">Ajuste as quantidades conforme necessário</div>
+    <div class="card" style="padding:8px 16px;display:none" id="srv-insumos-card">
       <div id="srv-insumos"></div>
     </div>
 
@@ -510,7 +534,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);
       <div class="result-val-lbl">preço de venda sugerido</div>
     </div>
 
-    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px;margin-top:16px">
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 24px">
       <button class="btn btn-gold" onclick="srvAddCarrinho()">＋ Adicionar ao pedido</button>
       <button class="btn btn-p" onclick="srvSalvarHist()">Salvar histórico</button>
       <button class="btn btn-o" onclick="srvLimpar()">Limpar</button>
@@ -765,8 +789,8 @@ function go(id,el){
   if(id==='produtos'){renderProdutos();}
   if(id==='estoque'){renderEstoque();}
   if(id==='pedidos'){renderPedidos();}
-  if(id==='servicos'){buildSrvInsumos();}
-  if(id==='plantas'){buildPlComponentes();}
+  if(id==='servicos'){buildSrvMenu();}
+  if(id==='plantas'){buildPlSelects();}
 }
 
 function goSub(showId,hideId,el){
@@ -827,7 +851,7 @@ function syncProdutosToSheets(){
 
 function syncManual(){
   syncProdutosDoSheets(function(ok){
-    if(ok){renderProdutos();renderEstoque();buildFloresGrid();buildSrvInsumos();buildPlComponentes();toast('Produtos atualizados ✓');}
+    if(ok){renderProdutos();renderEstoque();buildFloresGrid();buildSrvMenu();buildPlSelects();toast('Produtos atualizados ✓');}
     else{toast('Sem conexão — dados locais');}
   });
 }
@@ -931,7 +955,7 @@ function saveProduto(){
     toast('Produto salvo');
   }
   saveProd(arr);
-  renderProdutos();renderEstoque();buildFloresGrid();buildSrvInsumos();buildPlComponentes();
+  renderProdutos();renderEstoque();buildFloresGrid();buildSrvMenu();buildPlSelects();
   closeModal('m-prod');
 }
 
@@ -939,7 +963,7 @@ function delProd(btn){
   var id=btn.getAttribute('data-pid');
   if(!confirm('Remover produto?'))return;
   saveProd(loadProd().filter(function(p){return p.id!==id;}));
-  renderProdutos();renderEstoque();buildFloresGrid();buildSrvInsumos();buildPlComponentes();
+  renderProdutos();renderEstoque();buildFloresGrid();buildSrvMenu();buildPlSelects();
 }
 
 function changeEstQty(btn,d){
@@ -1339,14 +1363,10 @@ var PL_HIST_KEY='amabile_pl_hist_v1';
 var plTipo='planta';
 var plSel={};  // {prodId: qtd}
 
-function loadPlHist(){try{return JSON.parse(localStorage.getItem(PL_HIST_KEY)||'[]');}catch(e){return[];}}
-function savePlHist(h){localStorage.setItem(PL_HIST_KEY,JSON.stringify(h));}
 
-function setPlTipo(tipo,el){
-  plTipo=tipo;
-  document.querySelectorAll('[data-tipo]').forEach(function(b){b.classList.remove('on');});
-  el.classList.add('on'); plSel={}; buildPlComponentes(); calcPlantas();
-}
+
+
+
 
 // Categorias que aparecem na aba Plantas por tipo
 var PL_CATS={
@@ -1359,156 +1379,46 @@ var PL_CAT_LABELS={
   insumo:'Insumos & Acabamento'
 };
 
-function buildPlComponentes(){
-  var prods=loadProd().filter(function(p){return p.calc_pl;});
-  var cats=PL_CATS[plTipo]||['vaso','planta','insumo'];
-  var el=R('pl-componentes'); if(!el)return;
-  var html='';
-  cats.forEach(function(cat){
-    var items=prods.filter(function(p){return p.cat===cat;});
-    if(!items.length)return;
-    var lbl=cat==='planta'?(PL_CAT_LABELS.planta[plTipo]||'Planta'):PL_CAT_LABELS[cat]||cat;
-    html+='<div class="sec-title" style="margin-top:16px">'+lbl+'</div>';
-    html+='<div class="card" style="padding:8px 16px">';
-    items.forEach(function(p){
-      var mk=getMarkup(p.cat); var pv=ceil2(p.custo*mk);
-      var qtd=plSel[p.id]||0;
-      html+='<div class="insumo-row">'
-        +'<div class="insumo-info">'
-        +'<div class="insumo-nome">'+p.nome+'</div>'
-        +'<div class="insumo-desc">'+fmt(pv)+' / '+p.un+' &nbsp;<span style="font-size:11px;color:var(--g500);font-weight:600">'+p.qty+' em estoque</span></div>'
-        +'</div>'
-        +'<div class="insumo-right">'
-        +'<div style="display:flex;align-items:center;gap:6px">'
-        +'<button class="qty-btn" data-plid="'+p.id+'" data-pld="-1" style="width:34px;height:34px;font-size:18px">&#8722;</button>'
-        +'<input class="insumo-qtd" id="plq-'+p.id+'" type="number" min="0" step="0.1" value="'+qtd+'" oninput="setPlQtd(\''+p.id+'\',this.value)">'
-        +'<button class="qty-btn" data-plid="'+p.id+'" data-pld="1" style="width:34px;height:34px;font-size:18px">+</button>'
-        +'</div>'
-        +'<div class="insumo-total" id="pltotal-'+p.id+'">'+fmt(pv*qtd)+'</div>'
-        +'</div></div>';
-    });
-    html+='</div>';
-  });
-  el.innerHTML=html;
 
-  // Event listeners nos botoes de qty
-  el.querySelectorAll('[data-plid]').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var id=btn.getAttribute('data-plid'); var d=parseInt(btn.getAttribute('data-pld'));
-      var cur=parseFloat(plSel[id])||0;
-      setPlQtd(id,Math.max(0,cur+d));
-      var inp=R('plq-'+id); if(inp) inp.value=(parseFloat(plSel[id])||0);
-    });
-  });
-  calcPlantas();
-}
 
-function setPlQtd(id,val){
-  plSel[id]=Math.max(0,parseFloat(val)||0);
-  var prods=loadProd(); var p=prods.find(function(x){return x.id===id;});
-  if(p){
-    var pv=ceil2(p.custo*getMarkup(p.cat));
-    var tel=R('pltotal-'+id); if(tel) tel.textContent=fmt(pv*plSel[id]);
-  }
-  calcPlantas();
-}
+
 window.setPlQtd=setPlQtd;
 
-function calcPlantas(){
-  var prods=loadProd(); var total=0; var rows=[];
-  var mdo=parseFloat(R('pl-mdo').value)||0;
-  var extra=parseFloat(R('pl-extra').value)||0;
-  Object.keys(plSel).forEach(function(id){
-    var qtd=plSel[id]; if(!qtd)return;
-    var p=prods.find(function(x){return x.id===id;}); if(!p)return;
-    var pv=ceil2(p.custo*getMarkup(p.cat)); var sub=pv*qtd;
-    total+=sub;
-    rows.push('<div class="result-row"><span>'+p.nome+' x'+qtd+'</span><span>'+fmt(sub)+'</span></div>');
-  });
-  if(mdo>0){rows.push('<div class="result-row"><span>Mao de obra</span><span>'+fmt(mdo)+'</span></div>');total+=mdo;}
-  if(extra>0){rows.push('<div class="result-row"><span>Extras</span><span>'+fmt(extra)+'</span></div>');total+=extra;}
-  rows.push('<div class="result-row tot"><span>Total</span><span></span></div>');
-  var res=R('pl-result'); res.style.display=total>0?'block':'none';
-  R('pl-rows').innerHTML=rows.join('');
-  R('pl-total').textContent=fmt(total);
-}
 
-function getPlData(){
-  var prods=loadProd(); var total=0; var itens=[];
-  var mdo=parseFloat(R('pl-mdo').value)||0;
-  var extra=parseFloat(R('pl-extra').value)||0;
-  Object.keys(plSel).forEach(function(id){
-    var qtd=plSel[id]; if(!qtd)return;
-    var p=prods.find(function(x){return x.id===id;}); if(!p)return;
-    var pv=ceil2(p.custo*getMarkup(p.cat)); var sub=pv*qtd;
-    total+=sub; itens.push({id:p.id,nome:p.nome,qty:qtd,pv:pv});
-  });
-  total+=mdo+extra;
-  return {itens:itens,mdo:mdo,extra:extra,total:total,tipo:plTipo};
-}
 
-function plAddCarrinho(){
-  var d=getPlData(); if(!d.itens.length){toast('Selecione ao menos um item');return;}
-  var nome=R('pl-nome').value.trim()||(plTipo==='orquidea'?'Orquidea em Vaso':'Planta em Vaso');
-  var det=d.itens.map(function(i){return i.qty+'x '+i.nome.split(' ')[0];}).join(', ');
-  addToCart({nome:nome,det:det,total:d.total,tipo:'plantas',dados:d});
-  plLimpar();
-}
 
-function plSalvarHist(){
-  var d=getPlData(); if(!d.itens.length){toast('Selecione ao menos um item');return;}
-  var reg={id:Date.now(),nome:R('pl-nome').value.trim()||(plTipo==='orquidea'?'Orquidea em Vaso':'Planta em Vaso'),
-    tipo:plTipo,itens:d.itens,mdo:d.mdo,extra:d.extra,total:d.total,
-    data:new Date().toLocaleDateString('pt-BR')};
-  var h=loadPlHist(); h.unshift(reg); savePlHist(h);
-  toast('Salvo no historico'); plLimpar();
-}
 
-function plLimpar(){
-  plSel={}; R('pl-nome').value=''; R('pl-mdo').value=''; R('pl-extra').value='';
-  R('pl-result').style.display='none'; buildPlComponentes();
-}
 
-function renderPlHist(){
-  var busca=(R('pl-hist-busca').value||'').toLowerCase();
-  var h=loadPlHist().filter(function(r){return r.nome.toLowerCase().indexOf(busca)>=0;});
-  R('pl-hist-count').textContent=h.length+' registro'+(h.length!==1?'s':'');
-  var el=R('pl-hist-list');
-  if(!h.length){el.innerHTML='<div class="empty"><span>&#127804;</span><p>Nenhum registro</p></div>';return;}
-  el.innerHTML=h.map(function(r){
-    var det=r.itens.map(function(i){return i.qty+'x '+i.nome.split(' ')[0];}).join(', ');
-    var ico=r.tipo==='orquidea'?'🌸':'🪴';
-    return '<div class="hist-card"><div class="hist-foto-ph">'+ico+'</div>'
-      +'<div class="hist-info"><div class="hist-nome">'+r.nome+'</div>'
-      +'<div class="hist-det">'+det+'</div><div class="hist-meta">'+r.data+'</div></div>'
-      +'<div class="hist-price">'+fmt(r.total)+'</div>'
-      +'<button class="hist-del" data-plhid="'+r.id+'">&#215;</button></div>';
-  }).join('');
-}
-R('pl-hist-list').addEventListener('click',function(e){
+
+
+
+
+
+
+R('pl-hist-list') && R('pl-hist-list').addEventListener('click',function(e){
   var btn=e.target.closest('[data-plhid]'); if(!btn)return;
   var id=parseInt(btn.getAttribute('data-plhid'));
   savePlHist(loadPlHist().filter(function(r){return r.id!==id;})); renderPlHist();
 });
 
-// ═══════════════════════════════════════════════
-// SERVIÇOS (só plantio agora)
-// ═══════════════════════════════════════════════
-var SRV_HIST_KEY='amabile_srv_v2';
-var srvInsumoQtds={};
-
-function loadSrvHist(){try{return JSON.parse(localStorage.getItem(SRV_HIST_KEY)||'[]');}catch(e){return[];}}
-function saveSrvHist(h){localStorage.setItem(SRV_HIST_KEY,JSON.stringify(h));}
 
 function buildSrvInsumos(){
+  // Mostrar insumos só se algum serviço que usa insumos estiver selecionado
+  var cfg=loadSrvConfig();
+  var precisaInsumos=cfg.some(function(s){return srvSelecionados[s.id]&&s.usaInsumos;});
+  var card=R('srv-insumos-card');
+  var titulo=R('srv-insumos-titulo');
+  var sub=R('srv-insumos-sub');
+  if(card){card.style.display=precisaInsumos?'':'none';}
+  if(titulo){titulo.style.display=precisaInsumos?'':'none';}
+  if(sub){sub.style.display=precisaInsumos?'':'none';}
+  if(!precisaInsumos){calcSrv();return;}
+
   var prods=loadProd().filter(function(p){return p.calc_srv;});
-  var el=R('srv-insumos'); if(!el)return;
+  var el=R('srv-insumos');if(!el)return;
   if(!prods.length){
-    el.innerHTML='<div style="padding:20px;text-align:center;color:var(--muted);font-size:14px">'
-      +'<div style="font-size:28px;margin-bottom:8px">🧪</div>'
-      +'Nenhum insumo cadastrado.<br>'
-      +'<span style="font-size:13px">Va em <strong>Produtos → Novo</strong> e selecione "Calculadora de Servicos".</span></div>';
-    return;
+    el.innerHTML='<div style="padding:16px;text-align:center;color:var(--muted);font-size:13px">Cadastre insumos em Produtos com "Calculadora de Serviços"</div>';
+    calcSrv();return;
   }
   el.innerHTML=prods.map(function(p){
     var qtd=srvInsumoQtds[p.id]!==undefined?srvInsumoQtds[p.id]:1;
@@ -1534,62 +1444,321 @@ function setSrvQtd(id,val){
   if(p){var t=R('srvt-'+id);if(t)t.textContent=fmt(p.custo*srvInsumoQtds[id]);}
   calcSrv();
 }
-window.setSrvQtd=setSrvQtd;
 
 function calcSrv(){
+  var cfg=loadSrvConfig();
   var prods=loadProd().filter(function(p){return p.calc_srv;});
-  var mdo=parseFloat(R('srv-mdo').value)||0; var total=mdo; var rows=[];
-  if(mdo>0) rows.push('<div class="result-row"><span>Mao de obra</span><span>'+fmt(mdo)+'</span></div>');
-  prods.forEach(function(p){
-    var qtd=srvInsumoQtds[p.id]!==undefined?srvInsumoQtds[p.id]:1;
-    var v=p.custo*qtd; total+=v;
-    rows.push('<div class="result-row"><span>'+p.nome+' x'+qtd+'</span><span>'+fmt(v)+'</span></div>');
+  var total=0; var rows=[];
+  var precisaInsumos=false;
+
+  // Serviços selecionados
+  cfg.forEach(function(s){
+    if(!srvSelecionados[s.id])return;
+    total+=s.preco;
+    if(s.usaInsumos) precisaInsumos=true;
+    rows.push('<div class="result-row"><span>'+s.nome+'</span><span>'+fmt(s.preco)+'</span></div>');
   });
+
+  // Insumos (só se algum serviço usa)
+  if(precisaInsumos){
+    prods.forEach(function(p){
+      var qtd=srvInsumoQtds[p.id]!==undefined?srvInsumoQtds[p.id]:1;
+      var v=p.custo*qtd; if(!v)return;
+      total+=v;
+      rows.push('<div class="result-row"><span>'+p.nome+' x'+qtd+'</span><span>'+fmt(v)+'</span></div>');
+    });
+  }
+
   rows.push('<div class="result-row tot"><span>Total</span><span></span></div>');
-  var res=R('srv-result'); res.style.display=total>0?'block':'none';
-  R('srv-rows').innerHTML=rows.join(''); R('srv-total').textContent=fmt(total);
+  var res=R('srv-result'); if(!res)return;
+  res.style.display=total>0?'block':'none';
+  R('srv-rows').innerHTML=rows.join('');
+  R('srv-total').textContent=fmt(total);
 }
 
 function getSrvData(){
+  var cfg=loadSrvConfig();
   var prods=loadProd().filter(function(p){return p.calc_srv;});
-  var mdo=parseFloat(R('srv-mdo').value)||0; var total=mdo; var itens=[];
-  if(mdo>0) itens.push({nome:'Mao de obra',custo:mdo,qtd:1});
-  prods.forEach(function(p){
-    var qtd=srvInsumoQtds[p.id]!==undefined?srvInsumoQtds[p.id]:1;
-    var v=p.custo*qtd; total+=v;
-    itens.push({id:p.id,nome:p.nome,custo:p.custo,qtd:qtd,total:v});
+  var total=0; var itens=[];
+  var precisaInsumos=false;
+  cfg.forEach(function(s){
+    if(!srvSelecionados[s.id])return;
+    total+=s.preco; if(s.usaInsumos) precisaInsumos=true;
+    itens.push({nome:s.nome,custo:s.preco,qtd:1,tipo:'servico'});
   });
-  return {itens:itens,total:total,mdo:mdo};
+  if(precisaInsumos){
+    prods.forEach(function(p){
+      var qtd=srvInsumoQtds[p.id]!==undefined?srvInsumoQtds[p.id]:1;
+      var v=p.custo*qtd; if(!v)return;
+      total+=v; itens.push({id:p.id,nome:p.nome,custo:p.custo,qtd:qtd,total:v,tipo:'insumo'});
+    });
+  }
+  return {itens:itens,total:total};
 }
 
 function srvAddCarrinho(){
   var d=getSrvData();
-  var nome=R('srv-nome').value.trim()||'Servico de Plantio';
-  var det=d.itens.filter(function(i){return i.id;}).map(function(i){return i.nome.split(' ')[0];}).join(', ');
+  if(!d.itens.length){toast('Selecione ao menos um serviço');return;}
+  var nome=R('srv-nome').value.trim()||'Serviço';
+  var det=d.itens.filter(function(i){return i.tipo==='servico';}).map(function(i){return i.nome.split(' — ')[0];}).join(', ');
   addToCart({nome:nome,det:det,total:d.total,tipo:'servico',dados:d});
   srvLimpar();
 }
 
 function srvSalvarHist(){
   var d=getSrvData();
-  var reg={id:Date.now(),nome:R('srv-nome').value.trim()||'Servico de Plantio',
+  if(!d.itens.length){toast('Selecione ao menos um serviço');return;}
+  var reg={id:Date.now(),nome:R('srv-nome').value.trim()||'Serviço',
     itens:d.itens,total:d.total,data:new Date().toLocaleDateString('pt-BR')};
   var h=loadSrvHist();h.unshift(reg);saveSrvHist(h);
-  // Baixar estoque
+  // Baixar estoque dos insumos
   var arr=loadProd();
-  d.itens.forEach(function(item){
-    if(!item.id)return;
+  d.itens.filter(function(i){return i.id;}).forEach(function(item){
     var p=arr.find(function(x){return x.id===item.id;});
     if(p&&p.qty>0) p.qty=Math.max(0,p.qty-item.qtd);
   });
-  saveProd(arr); renderEstoque();
-  toast('Salvo no historico'); srvLimpar();
+  saveProd(arr);renderEstoque();
+  toast('Salvo no histórico');srvLimpar();
 }
 
 function srvLimpar(){
-  srvInsumoQtds={}; R('srv-nome').value=''; R('srv-mdo').value='';
-  R('srv-result').style.display='none'; buildSrvInsumos();
+  srvSelecionados={};srvInsumoQtds={};
+  R('srv-nome').value='';
+  R('srv-result').style.display='none';
+  buildSrvMenu();
 }
+
+// ═══════════════════════════════════════════════
+// PLANTAS & ORQUÍDEAS — SELETOR EM CASCATA
+// ═══════════════════════════════════════════════
+var PL_HIST_KEY='amabile_pl_hist_v1';
+var plTipo='planta';
+var plSelPlanta=null; // produto selecionado (planta/orquídea)
+var plSelVaso=null;   // produto selecionado (vaso)
+var plInsumoQtds={};  // {id: qtd}
+
+function loadPlHist(){try{return JSON.parse(localStorage.getItem(PL_HIST_KEY)||'[]');}catch(e){return[];}}
+function savePlHist(h){localStorage.setItem(PL_HIST_KEY,JSON.stringify(h));}
+
+function setPlTipo(tipo,el){
+  plTipo=tipo;
+  document.querySelectorAll('[data-tipo]').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');
+  plSelPlanta=null;plSelVaso=null;plInsumoQtds={};
+  buildPlSelects();calcPlantas();
+}
+
+function buildPlComponentes(){buildPlSelects();}
+
+function buildPlSelects(){
+  var prods=loadProd();
+  // Planta/Orquídea
+  var lbl=R('pl-planta-lbl');
+  if(lbl) lbl.textContent=plTipo==='orquidea'?'Orquídea':'Planta';
+  var selPlanta=R('pl-sel-planta');
+  if(selPlanta){
+    var plants=prods.filter(function(p){return p.calc_pl&&p.cat==='planta';});
+    selPlanta.innerHTML='<option value="">-- Selecione --</option>'
+      +plants.map(function(p){return '<option value="'+p.id+'"'+(plSelPlanta&&plSelPlanta.id===p.id?' selected':'')+'>'+p.nome+' — R$ '+fmtN(p.custo)+' / '+p.un+'</option>';}).join('');
+  }
+  // Vaso
+  var selVaso=R('pl-sel-vaso');
+  if(selVaso){
+    var vasos=prods.filter(function(p){return p.calc_pl&&p.cat==='vaso';});
+    if(!vasos.length){
+      // Se não há vasos cadastrados com calc_pl, mostrar instrução
+      selVaso.innerHTML='<option value="">-- Cadastre vasos em Produtos --</option>';
+    } else {
+      selVaso.innerHTML='<option value="">-- Selecione --</option>'
+        +vasos.map(function(p){return '<option value="'+p.id+'"'+(plSelVaso&&plSelVaso.id===p.id?' selected':'')+'>'+p.nome+' — R$ '+fmtN(p.custo)+' / '+p.un+'</option>';}).join('');
+    }
+  }
+  buildPlInsumos();
+}
+
+function onPlantaSel(){
+  var id=R('pl-sel-planta').value;
+  var prods=loadProd();
+  plSelPlanta=id?prods.find(function(p){return p.id===id;}):null;
+  var info=R('pl-planta-info');
+  if(plSelPlanta&&info){
+    var mk=getMarkup(plSelPlanta.cat);
+    var pv=ceil2(plSelPlanta.custo*mk);
+    info.style.display='block';
+    info.innerHTML='<strong>'+plSelPlanta.nome+'</strong><br>Custo: R$ '+fmtN(plSelPlanta.custo)+' &nbsp;·&nbsp; Preço de venda: <strong>R$ '+fmtN(pv)+'</strong><br>Estoque: '+plSelPlanta.qty+' '+plSelPlanta.un;
+  } else if(info){info.style.display='none';}
+  calcPlantas();
+}
+window.onPlantaSel=onPlantaSel;
+
+function onVasoSel(){
+  var id=R('pl-sel-vaso').value;
+  var prods=loadProd();
+  plSelVaso=id?prods.find(function(p){return p.id===id;}):null;
+  var info=R('pl-vaso-info');
+  if(plSelVaso&&info){
+    var mk=getMarkup(plSelVaso.cat);
+    var pv=ceil2(plSelVaso.custo*mk);
+    info.style.display='block';
+    info.innerHTML='<strong>'+plSelVaso.nome+'</strong><br>Custo: R$ '+fmtN(plSelVaso.custo)+' &nbsp;·&nbsp; Preço de venda: <strong>R$ '+fmtN(pv)+'</strong><br>Estoque: '+plSelVaso.qty+' '+plSelVaso.un;
+  } else if(info){info.style.display='none';}
+  calcPlantas();
+}
+window.onVasoSel=onVasoSel;
+
+function buildPlInsumos(){
+  var prods=loadProd().filter(function(p){return p.calc_pl&&p.cat==='insumo';});
+  var el=R('pl-insumos-lista');if(!el)return;
+  if(!prods.length){
+    el.innerHTML='<div style="padding:16px;text-align:center;color:var(--muted);font-size:13px">Cadastre insumos em Produtos com "Plantas & Orquídeas"</div>';
+    return;
+  }
+  el.innerHTML=prods.map(function(p){
+    var qtd=plInsumoQtds[p.id]!==undefined?plInsumoQtds[p.id]:1;
+    var mk=getMarkup(p.cat); var pv=ceil2(p.custo*mk);
+    var total=pv*qtd;
+    return '<div class="insumo-row">'
+      +'<div class="insumo-info">'
+      +'<div class="insumo-nome">'+p.nome+'</div>'
+      +'<div class="insumo-desc">R$ '+fmtN(pv)+' / '+p.un+' &nbsp;<span style="font-size:11px;color:var(--g500);font-weight:600">'+p.qty+' em estoque</span></div>'
+      +'</div>'
+      +'<div class="insumo-right">'
+      +'<span style="font-size:12px;color:var(--muted);font-weight:500">qtd</span>'
+      +'<input class="insumo-qtd" type="number" min="0" step="0.1" value="'+qtd+'"'
+      +' oninput="setPlInsumoQtd(\''+p.id+'\',this.value)">'
+      +'<div class="insumo-total" id="plinst-'+p.id+'">'+fmt(total)+'</div>'
+      +'</div></div>';
+  }).join('');
+  calcPlantas();
+}
+
+function setPlInsumoQtd(id,val){
+  plInsumoQtds[id]=Math.max(0,parseFloat(val)||0);
+  var p=loadProd().find(function(x){return x.id===id;});
+  if(p){
+    var mk=getMarkup(p.cat); var pv=ceil2(p.custo*mk);
+    var t=R('plinst-'+id);if(t)t.textContent=fmt(pv*plInsumoQtds[id]);
+  }
+  calcPlantas();
+}
+window.setPlInsumoQtd=setPlInsumoQtd;
+window.setPlQtd=setPlInsumoQtd; // alias
+
+function calcPlantas(){
+  var prods=loadProd(); var total=0; var rows=[];
+  var mdo=parseFloat(R('pl-mdo').value)||0;
+  var extra=parseFloat(R('pl-extra').value)||0;
+  // Planta
+  if(plSelPlanta){
+    var mk=getMarkup(plSelPlanta.cat); var pv=ceil2(plSelPlanta.custo*mk);
+    total+=pv;
+    rows.push('<div class="result-row"><span>'+plSelPlanta.nome+'</span><span>'+fmt(pv)+'</span></div>');
+  }
+  // Vaso
+  if(plSelVaso){
+    var mkv=getMarkup(plSelVaso.cat); var pvv=ceil2(plSelVaso.custo*mkv);
+    total+=pvv;
+    rows.push('<div class="result-row"><span>'+plSelVaso.nome+'</span><span>'+fmt(pvv)+'</span></div>');
+  }
+  // Insumos
+  prods.filter(function(p){return p.calc_pl&&p.cat==='insumo';}).forEach(function(p){
+    var qtd=plInsumoQtds[p.id]!==undefined?plInsumoQtds[p.id]:1; if(!qtd)return;
+    var mk=getMarkup(p.cat); var pv=ceil2(p.custo*mk); var sub=pv*qtd;
+    total+=sub;
+    rows.push('<div class="result-row"><span>'+p.nome+' x'+qtd+'</span><span>'+fmt(sub)+'</span></div>');
+  });
+  if(mdo>0){rows.push('<div class="result-row"><span>Mão de obra</span><span>'+fmt(mdo)+'</span></div>');total+=mdo;}
+  if(extra>0){rows.push('<div class="result-row"><span>Extras</span><span>'+fmt(extra)+'</span></div>');total+=extra;}
+  rows.push('<div class="result-row tot"><span>Total</span><span></span></div>');
+  var res=R('pl-result'); if(!res)return;
+  res.style.display=total>0?'block':'none';
+  R('pl-rows').innerHTML=rows.join('');
+  R('pl-total').textContent=fmt(total);
+}
+
+function getPlData(){
+  var prods=loadProd(); var total=0; var itens=[];
+  var mdo=parseFloat(R('pl-mdo').value)||0;
+  var extra=parseFloat(R('pl-extra').value)||0;
+  if(plSelPlanta){var mk=getMarkup(plSelPlanta.cat);var pv=ceil2(plSelPlanta.custo*mk);total+=pv;itens.push({id:plSelPlanta.id,nome:plSelPlanta.nome,qty:1,pv:pv});}
+  if(plSelVaso){var mkv=getMarkup(plSelVaso.cat);var pvv=ceil2(plSelVaso.custo*mkv);total+=pvv;itens.push({id:plSelVaso.id,nome:plSelVaso.nome,qty:1,pv:pvv});}
+  prods.filter(function(p){return p.calc_pl&&p.cat==='insumo';}).forEach(function(p){
+    var qtd=plInsumoQtds[p.id]!==undefined?plInsumoQtds[p.id]:1;if(!qtd)return;
+    var mk=getMarkup(p.cat);var pv=ceil2(p.custo*mk);var sub=pv*qtd;
+    total+=sub;itens.push({id:p.id,nome:p.nome,qty:qtd,pv:pv});
+  });
+  total+=mdo+extra;
+  return {itens:itens,mdo:mdo,extra:extra,total:total,tipo:plTipo};
+}
+
+function plAddCarrinho(){
+  if(!plSelPlanta){toast('Selecione uma planta');return;}
+  var d=getPlData();
+  var nome=R('pl-nome').value.trim()||(plTipo==='orquidea'?'Orquídea em Vaso':'Planta em Vaso');
+  var det=d.itens.map(function(i){return i.nome.split(' ')[0];}).join(', ');
+  addToCart({nome:nome,det:det,total:d.total,tipo:'plantas',dados:d});
+  plLimpar();
+}
+
+function plSalvarHist(){
+  if(!plSelPlanta){toast('Selecione uma planta');return;}
+  var d=getPlData();
+  var reg={id:Date.now(),nome:R('pl-nome').value.trim()||(plTipo==='orquidea'?'Orquídea em Vaso':'Planta em Vaso'),
+    tipo:plTipo,itens:d.itens,mdo:d.mdo,extra:d.extra,total:d.total,
+    data:new Date().toLocaleDateString('pt-BR')};
+  var h=loadPlHist();h.unshift(reg);savePlHist(h);
+  toast('Salvo no histórico');plLimpar();
+}
+
+function plLimpar(){
+  plSelPlanta=null;plSelVaso=null;plInsumoQtds={};
+  R('pl-nome').value='';R('pl-mdo').value='';R('pl-extra').value='';
+  R('pl-result').style.display='none';
+  var si=R('pl-planta-info');if(si)si.style.display='none';
+  var sv=R('pl-vaso-info');if(sv)sv.style.display='none';
+  buildPlSelects();
+}
+
+function renderPlHist(){
+  var busca=(R('pl-hist-busca').value||'').toLowerCase();
+  var h=loadPlHist().filter(function(r){return r.nome.toLowerCase().indexOf(busca)>=0;});
+  R('pl-hist-count').textContent=h.length+' registro'+(h.length!==1?'s':'');
+  var el=R('pl-hist-list');
+  if(!h.length){el.innerHTML='<div class="empty"><span>&#127804;</span><p>Nenhum registro</p></div>';return;}
+  el.innerHTML=h.map(function(r){
+    var det=r.itens.map(function(i){return i.nome.split(' ')[0];}).join(', ');
+    var ico=r.tipo==='orquidea'?'🌸':'🪴';
+    return '<div class="hist-card"><div class="hist-foto-ph">'+ico+'</div>'
+      +'<div class="hist-info"><div class="hist-nome">'+r.nome+'</div>'
+      +'<div class="hist-det">'+det+'</div><div class="hist-meta">'+r.data+'</div></div>'
+      +'<div class="hist-price">'+fmt(r.total)+'</div>'
+      +'<button class="hist-del" data-plhid="'+r.id+'">&#215;</button></div>';
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// SERVIÇOS (só plantio agora)
+// ═══════════════════════════════════════════════
+var SRV_HIST_KEY='amabile_srv_v2';
+var srvInsumoQtds={};
+
+function loadSrvHist(){try{return JSON.parse(localStorage.getItem(SRV_HIST_KEY)||'[]');}catch(e){return[];}}
+function saveSrvHist(h){localStorage.setItem(SRV_HIST_KEY,JSON.stringify(h));}
+
+
+
+
+window.setSrvQtd=setSrvQtd;
+
+
+
+
+
+
+
+
+
+
 
 function renderSrvHist(){
   var busca=(R('srv-hist-busca').value||'').toLowerCase();
@@ -1611,6 +1780,75 @@ R('srv-hist-list').addEventListener('click',function(e){
   var id=parseInt(btn.getAttribute('data-srvhid'));
   saveSrvHist(loadSrvHist().filter(function(r){return r.id!==id;})); renderSrvHist();
 });
+
+
+// ═══════════════════════════════════════════════
+// SERVIÇOS — CARDÁPIO TABELADO
+// ═══════════════════════════════════════════════
+var SRV_KEY2='amabile_srv_config_v1';
+
+var SRV_MENU_DEF=[
+  {id:'rep_p',  grupo:'Repotagem', nome:'Repotagem — Vaso Pequeno',  desc:'Vaso até 14 cm',       preco:15, usaInsumos:true},
+  {id:'rep_m',  grupo:'Repotagem', nome:'Repotagem — Vaso Médio',    desc:'Vaso 15–24 cm',        preco:25, usaInsumos:true},
+  {id:'rep_g',  grupo:'Repotagem', nome:'Repotagem — Vaso Grande',   desc:'Vaso 25–35 cm',        preco:40, usaInsumos:true},
+  {id:'rep_gg', grupo:'Repotagem', nome:'Repotagem — Vaso Extra',    desc:'Acima de 35 cm',       preco:65, usaInsumos:true},
+  {id:'furacao',grupo:'Serviços',  nome:'Furação de Vaso',           desc:'Furo de drenagem na base', preco:10, usaInsumos:false},
+  {id:'adubacao',grupo:'Serviços', nome:'Adubação Especializada',    desc:'Adubo específico para a espécie', preco:15, usaInsumos:false},
+  {id:'suporte',grupo:'Serviços',  nome:'Montagem em Suporte',       desc:'Placa, cesto ou madeira', preco:25, usaInsumos:false},
+  {id:'terrario',grupo:'Serviços', nome:'Terrário',                  desc:'Pedriscos, madeira, musgo e vidro', preco:20, usaInsumos:true}
+];
+
+function loadSrvConfig(){
+  try{var s=JSON.parse(localStorage.getItem(SRV_KEY2));if(s&&s.length)return s;}catch(e){}
+  return SRV_MENU_DEF.map(function(x){return Object.assign({},x);});
+}
+function saveSrvConfig(arr){localStorage.setItem(SRV_KEY2,JSON.stringify(arr));}
+
+var srvSelecionados={}; // {id: true/false}
+var srvInsumoQtds={};
+
+function buildSrvMenu(){
+  var cfg=loadSrvConfig();
+  var el=R('srv-menu-lista'); if(!el)return;
+
+  // Agrupar
+  var grupos={};
+  cfg.forEach(function(s){
+    if(!grupos[s.grupo]) grupos[s.grupo]=[];
+    grupos[s.grupo].push(s);
+  });
+
+  var html='';
+  Object.keys(grupos).forEach(function(g){
+    html+='<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 0 6px;border-bottom:1px solid var(--border);margin-bottom:4px">'+g+'</div>';
+    grupos[g].forEach(function(srv){
+      var sel=srvSelecionados[srv.id];
+      html+='<div class="insumo-row" style="cursor:pointer" onclick="toggleSrv(\''+srv.id+'\')">'
+        +'<div style="margin-right:12px">'
+        +'<div style="width:22px;height:22px;border-radius:6px;border:2px solid '+(sel?'var(--g900)':'var(--border)')+';background:'+(sel?'var(--g900)':'transparent')+';display:flex;align-items:center;justify-content:center;transition:all .13s">'
+        +(sel?'<svg width="12" height="9" viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')
+        +'</div></div>'
+        +'<div class="insumo-info">'
+        +'<div class="insumo-nome">'+srv.nome+'</div>'
+        +'<div class="insumo-desc">'+srv.desc+(srv.usaInsumos?' · <span style="color:var(--g500);font-weight:600">usa insumos</span>':'')+'</div>'
+        +'</div>'
+        +'<div style="text-align:right;flex-shrink:0">'
+        +'<div style="font-size:16px;font-weight:600;color:var(--g900)">R$ '+srv.preco.toFixed(2).replace('.',',')+'</div>'
+        +'</div>'
+        +'</div>';
+    });
+  });
+  el.innerHTML=html;
+  buildSrvInsumos();
+  calcSrv();
+}
+window.buildSrvMenu=buildSrvMenu;
+
+function toggleSrv(id){
+  srvSelecionados[id]=!srvSelecionados[id];
+  buildSrvMenu();
+}
+window.toggleSrv=toggleSrv;
 
 // ═══════════════════════════════════════════════
 // PEDIDOS
@@ -1706,7 +1944,7 @@ renderEstoque();
 
 // Sincronizar do Sheets ao abrir
 syncProdutosDoSheets(function(ok){
-  if(ok){renderProdutos();renderEstoque();buildFloresGrid();buildSrvInsumos();buildPlComponentes();}
+  if(ok){renderProdutos();renderEstoque();buildFloresGrid();buildSrvMenu();buildPlSelects();}
 });
 </script>
 
