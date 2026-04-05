@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Amabile">
+<meta name="theme-color" content="#1c3a2a">
+<title>Amabile Gestão</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#1c3a2a;--g2:#2a5240;--g3:#e8f4ee;--g4:#f2faf5;
+  --gold:#c49a3c;--gold2:#f0c060;
+  --cream:#faf8f4;--cream2:#f0ece4;--white:#fff;
+  --text:#1a2820;--muted:#5a7060;--light:#9ab0a0;
+  --bdr:rgba(30,60,40,.12);--bdr2:rgba(30,60,40,.22);
+  --red:#c0392b;--r:10px;--r2:7px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:"DM Sans",sans-serif;background:var(--cream2);color:var(--text);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;z-index:999;background:var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.lcard{background:var(--white);border-radius:20px;padding:32px 24px;width:100%;max-width:360px}
+.llogo{font-family:"Playfair Display",serif;font-size:32px;font-style:italic;color:var(--g);text-align:center;margin-bottom:4px}
+.llogo em{color:var(--gold);font-style:normal}
+.lsub{font-size:11px;color:var(--muted);text-align:center;letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px}
+.llbl{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;display:block}
+.linp{width:100%;padding:12px 14px;border:1.5px solid var(--bdr);border-radius:var(--r2);font-size:15px;font-family:"DM Sans",sans-serif;color:var(--text);background:var(--white);outline:none;margin-bottom:14px;-webkit-appearance:none}
+.linp:focus{border-color:var(--g)}
+.lbtn{width:100%;padding:14px;background:var(--g);color:#fff;border:none;border-radius:var(--r2);font-size:15px;font-weight:700;font-family:"DM Sans",sans-serif;cursor:pointer}
+.lbtn:active{transform:scale(.98)}
+.lerr{background:#fdf0f0;border:1px solid #f0c0c0;border-radius:var(--r2);padding:10px;font-size:13px;color:#a03030;text-align:center;margin-top:12px;display:none}
+.lsync{font-size:11px;color:rgba(255,255,255,.45);text-align:center;margin-top:14px}
+
+/* APP */
+#app{display:none;flex-direction:column;height:100%}
+.hdr{background:var(--g);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.hdr-logo{font-family:"Playfair Display",serif;font-size:19px;font-style:italic;color:#fff}
+.hdr-logo em{color:var(--gold2);font-style:normal}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.sync-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.65);border-radius:6px;padding:4px 9px;font-size:11px;font-weight:500;cursor:pointer;font-family:"DM Sans",sans-serif}
+.upill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border-radius:30px;padding:3px 10px 3px 4px;cursor:pointer}
+.av{width:26px;height:26px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.uname{font-size:11px;color:rgba(255,255,255,.9);font-weight:500}
+.syncbar{background:var(--g2);padding:7px 16px;font-size:12px;color:rgba(255,255,255,.85);text-align:center;display:none;align-items:center;justify-content:center;gap:7px;flex-shrink:0}
+.syncbar.on{display:flex}
+.sdot{width:6px;height:6px;border-radius:50%;background:var(--gold2);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.offbar{display:none;background:#7a4a00;color:#fff;padding:7px;font-size:12px;text-align:center;flex-shrink:0}
+
+/* NAV */
+.nav{background:var(--white);padding:8px 12px;border-bottom:1px solid var(--bdr);display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.nav::-webkit-scrollbar{display:none}
+.nb{flex-shrink:0;padding:8px 13px;font-size:11px;font-weight:600;color:var(--muted);border:none;background:none;border-radius:20px;cursor:pointer;white-space:nowrap;font-family:"DM Sans",sans-serif;transition:all .15s;position:relative}
+.nb.on{background:var(--g);color:#fff}
+.nbdot{position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;background:var(--gold);color:#fff;font-size:9px;font-weight:700;display:none;align-items:center;justify-content:center}
+.nbdot.on{display:flex}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.panel{display:none;padding:14px 14px 120px}
+.panel.on{display:block}
+
+/* TYPOGRAPHY */
+.sec{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.sec::before{content:'';width:3px;height:11px;background:var(--gold);border-radius:2px;flex-shrink:0}
+.step-row{display:flex;align-items:center;gap:8px;margin:14px 0 8px}
+.step-row:first-child{margin-top:0}
+.stepn{width:22px;height:22px;border-radius:50%;background:var(--bdr2);color:var(--muted);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.stepn.ok{background:var(--g);color:#fff}
+.steplbl{font-size:13px;font-weight:600;color:var(--text)}
+
+/* GRID 3 COLUNAS */
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.fc{border:1.5px solid var(--bdr);border-radius:var(--r2);padding:9px 7px;background:var(--white);cursor:pointer;transition:all .13s;text-align:center}
+.fc.sel{border-color:var(--g);background:var(--g3)}
+.fn{font-size:11px;font-weight:600;color:var(--text);line-height:1.25;margin-bottom:3px}
+.fp{font-size:11px;color:var(--g);font-weight:700;margin-bottom:6px}
+.qr{display:flex;align-items:center;justify-content:center;gap:5px}
+.qbtn{width:27px;height:27px;border-radius:7px;border:1.5px solid var(--bdr);background:var(--cream);color:var(--text);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:all .12s;flex-shrink:0}
+.qbtn.on{background:var(--g);color:#fff;border-color:var(--g)}
+.qbtn:active{transform:scale(.88)}
+.qnum{font-size:13px;font-weight:700;min-width:20px;text-align:center;color:var(--text)}
+.pills{display:flex;flex-wrap:wrap;gap:4px;min-height:4px;margin-bottom:10px}
+.pill{background:var(--g3);color:var(--g);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600}
+
+/* SELECT */
+select{width:100%;padding:11px 13px;border:1.5px solid var(--bdr);border-radius:var(--r2);font-size:13px;font-family:"DM Sans",sans-serif;color:var(--text);background:var(--white);-webkit-appearance:none;outline:none;margin-bottom:10px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%231c3a2a' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px}
+select:focus{border-color:var(--g)}
+.infocard{background:var(--g3);border:1px solid rgba(28,58,42,.12);border-radius:var(--r2);padding:10px 13px;margin-bottom:10px;font-size:13px;color:var(--g2);display:none}
+
+/* PICK GRID */
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
+.pb{padding:10px 8px;border:1.5px solid var(--bdr);border-radius:var(--r2);background:var(--white);color:var(--muted);font-size:12px;font-weight:500;font-family:"DM Sans",sans-serif;cursor:pointer;text-align:center;transition:all .13s;line-height:1.35}
+.pb small{display:block;font-size:10px;font-weight:600;margin-top:2px;color:var(--muted)}
+.pb.sel{border-color:var(--g);background:var(--g3);color:var(--g)}
+.pb.sel small{color:var(--g2)}
+.pb:active{transform:scale(.97)}
+
+/* INSUMOS */
+.ins-wrap{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r2);padding:4px 12px;margin-bottom:10px}
+.ins-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid rgba(30,60,40,.06);gap:10px}
+.ins-row:last-child{border-bottom:none}
+.ins-info{flex:1}
+.ins-nome{font-size:13px;font-weight:600;color:var(--text)}
+.ins-un{font-size:11px;color:var(--light);margin-top:1px}
+.ins-qtd{width:52px;padding:7px 8px;border:1.5px solid var(--bdr);border-radius:7px;font-size:14px;font-family:"DM Sans",sans-serif;color:var(--text);background:var(--white);outline:none;text-align:center;-webkit-appearance:none}
+.ins-qtd:focus{border-color:var(--gold)}
+.ins-tot{font-size:13px;font-weight:600;color:var(--g);min-width:58px;text-align:right}
+
+/* EXTRA */
+.extra-btn{display:flex;align-items:center;gap:6px;padding:10px 0;font-size:13px;color:var(--g2);font-weight:600;cursor:pointer;border:none;background:none;font-family:"DM Sans",sans-serif;width:100%}
+.xdrop{background:var(--cream);border:1px solid var(--bdr);border-radius:var(--r2);padding:12px;margin-bottom:10px;display:none}
+.xdrop.on{display:block}
+.xrow{display:flex;gap:7px;margin-bottom:7px;align-items:center}
+.xrow select{flex:1;margin-bottom:0}
+.xqtd{width:54px!important;padding:9px 8px!important;margin-bottom:0!important;text-align:center;font-size:14px!important}
+.xadd{width:100%;padding:9px;background:var(--g);color:#fff;border:none;border-radius:var(--r2);font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif}
+.xitem{display:flex;align-items:center;padding:7px 0;border-bottom:1px solid var(--bdr);gap:8px;font-size:13px}
+.xitem:last-child{border-bottom:none}
+.xitem span{flex:1;font-weight:500;color:var(--text)}
+.xitem strong{color:var(--g);font-weight:600}
+.xdel{border:none;background:none;color:var(--light);cursor:pointer;font-size:18px;padding:0;line-height:1}
+
+/* RESUMO */
+.resumo{background:var(--g4);border:1px solid rgba(28,58,42,.10);border-radius:var(--r2);padding:12px 14px;margin-bottom:12px;display:none}
+.rrow{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);padding:3px 0}
+.rrow.tot{font-size:15px;font-weight:700;color:var(--text);border-top:1px solid rgba(28,58,42,.12);padding-top:9px;margin-top:6px}
+
+/* SERVIÇOS */
+.grp-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:12px 0 5px;border-bottom:1px solid var(--bdr);margin-bottom:2px}
+.srv-wrap{border-bottom:1px solid var(--bdr);padding:10px 0}
+.srv-wrap:last-child{border-bottom:none}
+.srv-top{display:flex;align-items:center;gap:12px;cursor:pointer}
+.srv-chk{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--bdr2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.srv-chk.on{background:var(--g);border-color:var(--g)}
+.srv-nome{font-size:14px;font-weight:600;color:var(--text)}
+.srv-desc{font-size:12px;color:var(--muted);margin-top:1px}
+.srv-preco{font-size:14px;font-weight:700;color:var(--g);white-space:nowrap;margin-left:auto}
+.srv-qtd-row{display:flex;align-items:center;gap:8px;margin-top:9px;padding-left:36px}
+.srv-qlbl{font-size:11px;color:var(--muted)}
+.sqbtn{width:28px;height:28px;border-radius:7px;border:1.5px solid var(--bdr);background:var(--g3);color:var(--g);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;font-weight:500;flex-shrink:0}
+.sqbtn:active{transform:scale(.88)}
+.sqnum{font-size:14px;font-weight:700;min-width:20px;text-align:center;color:var(--text)}
+.srv-subtot{font-size:12px;font-weight:600;color:var(--g2);margin-left:auto}
+
+/* BOTTOM BAR */
+.botbar{position:sticky;bottom:0;background:var(--g);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bot-info{flex:1}
+.bot-lbl{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.bot-val{font-family:"Playfair Display",serif;font-size:22px;color:var(--gold2)}
+.bot-btns{display:flex;gap:7px;flex-shrink:0}
+.btn-clear{background:rgba(255,255,255,.13);color:rgba(255,255,255,.85);border:none;padding:10px 13px;border-radius:var(--r2);font-size:12px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;white-space:nowrap}
+.btn-cart{background:var(--gold);color:#fff;border:none;padding:10px 16px;border-radius:var(--r2);font-size:13px;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;white-space:nowrap}
+.btn-cart:active,.btn-clear:active{transform:scale(.96)}
+
+/* CARRINHO */
+.cart-empty{text-align:center;padding:40px 20px}
+.ci{background:var(--white);border:1.5px solid var(--bdr);border-radius:var(--r2);padding:13px 14px;margin-bottom:9px}
+.ci-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px;gap:8px}
+.ci-nome{font-size:14px;font-weight:700;color:var(--text)}
+.ci-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.ci-badge.arranjo{background:#FBEAF0;color:#72243E}
+.ci-badge.planta{background:var(--g3);color:var(--g)}
+.ci-badge.orquidea{background:#EEEDFE;color:#3C3489}
+.ci-badge.servico{background:#E6F1FB;color:#0C447C}
+.ci-det{font-size:12px;color:var(--muted);margin-bottom:9px;line-height:1.5}
+.ci-bot{display:flex;align-items:center;justify-content:space-between}
+.ci-val{font-family:"Playfair Display",serif;font-size:18px;color:var(--text)}
+.ci-del{border:none;background:none;color:var(--light);cursor:pointer;font-size:20px;padding:0;line-height:1}
+.vrow{background:var(--cream);border-radius:var(--r2);padding:10px 13px;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.vlbl{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
+.vsel{flex:1;padding:8px 10px;border:1.5px solid var(--bdr);border-radius:7px;font-size:13px;font-family:"DM Sans",sans-serif;color:var(--text);background:var(--white);-webkit-appearance:none;outline:none}
+.cart-divider{height:1px;background:var(--bdr);margin:14px 0}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.cart-acts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.act-btn{padding:13px;border:none;border-radius:var(--r2);font-size:13px;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;display:flex;align-items:center;justify-content:center;gap:7px}
+.act-whats{background:#25D366;color:#fff}
+.act-fechar{background:var(--g);color:#fff}
+.act-tiny{background:#FF6B00;color:#fff;grid-column:1/-1}
+.act-limpar{background:var(--cream2);color:var(--red);border:1.5px solid rgba(192,57,43,.2);margin-top:4px;width:100%}
+
+/* CONFIG */
+.cfg-sec{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r2);padding:4px 14px;margin-bottom:12px}
+.cfg-row{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid rgba(30,60,40,.06);gap:10px}
+.cfg-row:last-child{border-bottom:none}
+.cfg-info{flex:1}
+.cfg-lbl{font-size:14px;font-weight:600;color:var(--text)}
+.cfg-sub{font-size:12px;color:var(--muted);margin-top:1px}
+.cfg-inp{width:80px;padding:8px 10px;border:1.5px solid var(--bdr);border-radius:7px;font-size:14px;font-family:"DM Sans",sans-serif;color:var(--text);background:var(--white);outline:none;text-align:right;-webkit-appearance:none}
+.cfg-inp:focus{border-color:var(--gold)}
+.cfg-inp-full{width:100%;padding:11px 13px;border:1.5px solid var(--bdr);border-radius:var(--r2);font-size:13px;font-family:monospace;color:var(--text);background:var(--white);outline:none;-webkit-appearance:none;margin-bottom:8px}
+.cfg-inp-full:focus{border-color:var(--g)}
+.savebtn{width:100%;padding:12px;background:var(--g);color:#fff;border:none;border-radius:var(--r2);font-size:14px;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;margin-top:4px;margin-bottom:16px}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(15,30,20,.55);backdrop-filter:blur(4px);align-items:flex-end;justify-content:center}
+.overlay.on{display:flex}
+.modal{background:var(--cream);border-radius:20px 20px 0 0;padding:0 18px 44px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;animation:mup .24s cubic-bezier(.4,0,.2,1)}
+@keyframes mup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mhandle{width:36px;height:4px;border-radius:2px;background:var(--bdr2);margin:13px auto 18px}
+.mtitle{font-family:"Playfair Display",serif;font-size:20px;color:var(--text);margin-bottom:16px}
+.mf{margin-bottom:13px}
+.mf label{display:block;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.mf input,.mf select,.mf textarea{width:100%;background:var(--white);border:1.5px solid var(--bdr);border-radius:var(--r2);padding:11px 13px;font-family:"DM Sans",sans-serif;font-size:14px;color:var(--text);outline:none;-webkit-appearance:none}
+.mf input:focus,.mf select:focus,.mf textarea:focus{border-color:var(--g)}
+.mf textarea{resize:vertical;min-height:72px;line-height:1.55}
+.mg2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.mbtn{width:100%;padding:13px;background:var(--g);color:#fff;border:none;border-radius:var(--r2);font-size:14px;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;margin-top:4px}
+
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:12px 22px;border-radius:30px;font-size:14px;font-weight:500;z-index:999;opacity:0;pointer-events:none;transition:opacity .22s,bottom .22s;white-space:nowrap;max-width:90vw;text-align:center}
+.toast.on{opacity:1;bottom:96px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="lcard">
+    <div class="llogo">Amabile <em>flores</em></div>
+    <div class="lsub">sistema de gestão</div>
+    <label class="llbl">Login</label>
+    <input class="linp" type="text" id="inp-login" placeholder="seu login" autocomplete="username">
+    <label class="llbl">Senha</label>
+    <input class="linp" type="password" id="inp-senha" placeholder="••••" autocomplete="current-password">
+    <button class="lbtn" onclick="tentarLogin()">Entrar</button>
+    <div class="lerr" id="lerr">Login ou senha incorretos</div>
+  </div>
+  <div class="lsync" id="lsync">Conectando ao Google Sheets…</div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="offbar" id="offbar">🔌 Sem conexão — usando dados locais</div>
+  <div class="syncbar" id="syncbar"><div class="sdot"></div><span id="syncmsg">Sincronizando…</span></div>
+  <header class="hdr">
+    <div class="hdr-logo">Amabile <em>flores</em></div>
+    <div class="hdr-r">
+      <button class="sync-btn" onclick="doSync()">⟳</button>
+      <div class="upill" onclick="logout()">
+        <div class="av" id="app-av">?</div>
+        <div class="uname" id="app-nome">—</div>
+      </div>
+    </div>
+  </header>
+  <nav class="nav">
+    <button class="nb on" onclick="goTab('arranjo',this)">💐 Arranjo</button>
+    <button class="nb" onclick="goTab('planta',this)">🪴 Planta</button>
+    <button class="nb" onclick="goTab('orquidea',this)">🌸 Orquídea</button>
+    <button class="nb" onclick="goTab('servicos',this)">🔧 Serviços</button>
+    <button class="nb" id="nb-carr" onclick="goTab('carrinho',this)">🛒 Carrinho<span class="nbdot" id="cart-dot">0</span></button>
+    <button class="nb" id="nb-cfg" style="display:none" onclick="goTab('config',this)">⚙️ Config</button>
+  </nav>
+  <div class="content">
+
+    <!-- ARRANJO -->
+    <div class="panel on" id="panel-arranjo">
+      <div class="sec">Flores &amp; Folhagens</div>
+      <div class="fg" id="arr-fg"></div>
+      <div class="pills" id="arr-pills"></div>
+      <div class="sec">Vaso / Cachepot</div>
+      <select id="arr-vaso" onchange="arrCalc()"><option value="0">— Sem vaso —</option></select>
+      <div class="sec">Tipo de Montagem</div>
+      <div class="pg" id="arr-mont"></div>
+      <div class="sec">Embalagem</div>
+      <div class="pg" id="arr-emb"></div>
+      <div class="resumo" id="arr-res">
+        <div class="rrow"><span>Flores &amp; folhagens</span><span id="ar-fl">—</span></div>
+        <div class="rrow" id="ar-mr"><span>Montagem</span><span id="ar-mv">—</span></div>
+        <div class="rrow" id="ar-vr"><span>Vaso</span><span id="ar-vv">—</span></div>
+        <div class="rrow" id="ar-er"><span>Embalagem</span><span id="ar-ev">—</span></div>
+        <div class="rrow tot"><span>Total</span><span id="ar-tot">—</span></div>
+      </div>
+      <div class="botbar">
+        <div class="bot-info"><div class="bot-lbl">Total do arranjo</div><div class="bot-val" id="arr-bv">R$ 0,00</div></div>
+        <div class="bot-btns">
+          <button class="btn-clear" onclick="limpar('arranjo')">✕ Limpar</button>
+          <button class="btn-cart" onclick="addCart('arranjo')">+ Carrinho</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLANTA -->
+    <div class="panel" id="panel-planta">
+      <div class="step-row" style="margin-top:0"><div class="stepn" id="ps1">1</div><div class="steplbl">Selecione a planta</div></div>
+      <select id="p-planta" onchange="pSelPlanta()"><option value="">— Selecione —</option></select>
+      <div class="infocard" id="p-info"></div>
+      <div class="step-row"><div class="stepn" id="ps2">2</div><div class="steplbl">Vaso / Cachepot</div></div>
+      <select id="p-vaso" onchange="pCalc()"><option value="0">— Selecione —</option></select>
+      <div class="step-row"><div class="stepn" id="ps3">3</div><div class="steplbl">Insumos de plantio</div></div>
+      <div id="p-ins"><div class="ins-wrap"><div style="padding:10px 0;font-size:13px;color:var(--muted)">Selecione a planta primeiro</div></div></div>
+      <div class="step-row"><div class="stepn">4</div><div class="steplbl">Extras (opcional)</div></div>
+      <button class="extra-btn" onclick="toggleX('p')">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#2a5240" stroke-width="1.5"/><path d="M8 5v6M5 8h6" stroke="#2a5240" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Adicionar produto extra
+      </button>
+      <div class="xdrop" id="p-xdrop">
+        <div class="xrow"><select id="p-xsel" style="margin-bottom:0"><option value="">— Produto —</option></select><input class="xqtd" type="number" id="p-xqtd" value="1" min="1"></div>
+        <button class="xadd" onclick="addExtra('p')">Adicionar</button>
+      </div>
+      <div id="p-xlist"></div>
+      <div class="resumo" id="p-res">
+        <div class="rrow"><span>Planta</span><span id="pr-pl">—</span></div>
+        <div class="rrow" id="pr-vr"><span>Vaso</span><span id="pr-vv">—</span></div>
+        <div class="rrow" id="pr-ir"><span>Insumos</span><span id="pr-iv">—</span></div>
+        <div class="rrow" id="pr-er" style="display:none"><span>Extras</span><span id="pr-ev">—</span></div>
+        <div class="rrow tot"><span>Total</span><span id="pr-tot">—</span></div>
+      </div>
+      <div class="botbar">
+        <div class="bot-info"><div class="bot-lbl">Total</div><div class="bot-val" id="p-bv">R$ 0,00</div></div>
+        <div class="bot-btns">
+          <button class="btn-clear" onclick="limpar('planta')">✕ Limpar</button>
+          <button class="btn-cart" onclick="addCart('planta')">+ Carrinho</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORQUIDEA -->
+    <div class="panel" id="panel-orquidea">
+      <div class="step-row" style="margin-top:0"><div class="stepn" id="os1">1</div><div class="steplbl">Selecione a orquídea</div></div>
+      <select id="o-orq" onchange="oSelOrq()"><option value="">— Selecione —</option></select>
+      <div class="infocard" id="o-info"></div>
+      <div class="step-row"><div class="stepn" id="os2">2</div><div class="steplbl">Vaso / Cachepot</div></div>
+      <select id="o-vaso" onchange="oCalc()"><option value="0">— Selecione —</option></select>
+      <div class="step-row"><div class="stepn" id="os3">3</div><div class="steplbl">Insumos de montagem</div></div>
+      <div id="o-ins"><div class="ins-wrap"><div style="padding:10px 0;font-size:13px;color:var(--muted)">Selecione a orquídea primeiro</div></div></div>
+      <div class="step-row"><div class="stepn">4</div><div class="steplbl">Embalagem</div></div>
+      <div class="pg" id="o-emb"></div>
+      <div class="step-row"><div class="stepn">5</div><div class="steplbl">Extras (opcional)</div></div>
+      <button class="extra-btn" onclick="toggleX('o')">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#2a5240" stroke-width="1.5"/><path d="M8 5v6M5 8h6" stroke="#2a5240" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Adicionar produto extra
+      </button>
+      <div class="xdrop" id="o-xdrop">
+        <div class="xrow"><select id="o-xsel" style="margin-bottom:0"><option value="">— Produto —</option></select><input class="xqtd" type="number" id="o-xqtd" value="1" min="1"></div>
+        <button class="xadd" onclick="addExtra('o')">Adicionar</button>
+      </div>
+      <div id="o-xlist"></div>
+      <div class="resumo" id="o-res">
+        <div class="rrow"><span>Orquídea</span><span id="or-oq">—</span></div>
+        <div class="rrow" id="or-vr"><span>Vaso</span><span id="or-vv">—</span></div>
+        <div class="rrow" id="or-ir"><span>Insumos</span><span id="or-iv">—</span></div>
+        <div class="rrow" id="or-embr" style="display:none"><span>Embalagem</span><span id="or-embv">—</span></div>
+        <div class="rrow" id="or-er" style="display:none"><span>Extras</span><span id="or-ev">—</span></div>
+        <div class="rrow tot"><span>Total</span><span id="or-tot">—</span></div>
+      </div>
+      <div class="botbar">
+        <div class="bot-info"><div class="bot-lbl">Total</div><div class="bot-val" id="o-bv">R$ 0,00</div></div>
+        <div class="bot-btns">
+          <button class="btn-clear" onclick="limpar('orquidea')">✕ Limpar</button>
+          <button class="btn-cart" onclick="addCart('orquidea')">+ Carrinho</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICOS -->
+    <div class="panel" id="panel-servicos">
+      <div class="sec">Selecione os serviços</div>
+      <div id="srv-lista"></div>
+      <div id="srv-ins-wrap" style="display:none">
+        <div class="sec" style="margin-top:14px">Insumos utilizados</div>
+        <div class="ins-wrap" id="srv-ins-card"></div>
+      </div>
+      <div class="resumo" id="srv-res" style="margin-top:10px">
+        <div id="srv-res-rows"></div>
+        <div class="rrow tot"><span>Total</span><span id="srv-tot">—</span></div>
+      </div>
+      <div class="botbar">
+        <div class="bot-info"><div class="bot-lbl">Total serviços</div><div class="bot-val" id="srv-bv">R$ 0,00</div></div>
+        <div class="bot-btns">
+          <button class="btn-clear" onclick="limpar('servico')">✕ Limpar</button>
+          <button class="btn-cart" onclick="addCart('servico')">+ Carrinho</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARRINHO -->
+    <div class="panel" id="panel-carrinho">
+      <div class="vrow">
+        <div class="vlbl">Vendedor:</div>
+        <select class="vsel" id="vsel"></select>
+      </div>
+      <div id="cart-body"></div>
+      <div id="cart-footer" style="display:none">
+        <div class="cart-divider"></div>
+        <div class="cart-total-row">
+          <span style="font-size:13px;font-weight:600">Total do pedido</span>
+          <span style="font-family:'Playfair Display',serif;font-size:24px;color:var(--text)" id="cart-grand">R$ 0,00</span>
+        </div>
+        <div class="cart-acts">
+          <button class="act-btn act-whats" onclick="enviarWA()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </button>
+          <button class="act-btn act-fechar" onclick="abrirFechar()">Fechar Pedido</button>
+          <button class="act-btn act-tiny act-limpar" style="background:var(--cream2);color:var(--red);border:1.5px solid rgba(192,57,43,.2)" onclick="limparCarrinho()">🗑 Limpar carrinho</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIG -->
+    <div class="panel" id="panel-config">
+      <div class="sec">Markups por categoria</div>
+      <div class="cfg-sec" id="cfg-mk"></div>
+      <button class="savebtn" onclick="salvarMK()">Salvar markups</button>
+      <div class="sec">Preços de serviços</div>
+      <div class="cfg-sec" id="cfg-srv"></div>
+      <button class="savebtn" onclick="salvarSrvCfg()">Salvar preços</button>
+      <div class="sec">Tiny ERP — Token</div>
+      <input class="cfg-inp-full" type="password" id="tiny-inp" placeholder="Cole o token do Tiny aqui">
+      <button class="savebtn" onclick="salvarTiny()">Salvar token</button>
+      <div class="sec">Google Sheets — URL</div>
+      <input class="cfg-inp-full" type="text" id="gs-inp" placeholder="https://script.google.com/macros/s/.../exec">
+      <button class="savebtn" onclick="salvarGS()">Salvar URL</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL FECHAR -->
+<div class="overlay" id="m-fechar" onclick="if(event.target.id==='m-fechar')document.getElementById('m-fechar').classList.remove('on')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mtitle">Fechar pedido</div>
+    <div class="mg2">
+      <div class="mf"><label>Cliente</label><input type="text" id="fc-cliente" placeholder="Nome"></div>
+      <div class="mf"><label>Telefone</label><input type="tel" id="fc-tel" placeholder="(11) 9..."></div>
+    </div>
+    <div class="mf"><label>Canal</label>
+      <select id="fc-canal"><option>Presencial</option><option>WhatsApp</option><option>Instagram</option><option>Shopify</option><option>Mercado Livre</option></select>
+    </div>
+    <div class="mf"><label>Data de entrega</label><input type="date" id="fc-data"></div>
+    <div class="mf"><label>Observações</label><textarea id="fc-obs" placeholder="Anotações"></textarea></div>
+    <div style="background:var(--g3);border-radius:var(--r2);padding:13px;margin-bottom:14px">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:3px;font-weight:700;letter-spacing:.07em;text-transform:uppercase">Total</div>
+      <div style="font-family:'Playfair Display',serif;font-size:28px;color:var(--g)" id="fc-total">R$ 0,00</div>
+    </div>
+    <button class="mbtn" onclick="confirmarPedido()">Confirmar pedido</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var G=function(id){return document.getElementById(id)};
+var fmt=function(n){return 'R$ '+(Math.round((n||0)*100)/100).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})};
+var cleanNum=function(v){if(typeof v==='number')return v;var s=String(v||'').replace(/R\$\s*/g,'').replace(/\./g,'').replace(',','.').trim();return parseFloat(s)||0};
+
+// ─── TOAST ───
+var toastT;
+function toast(msg,dur){var t=G('toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on')},dur||2400)}
+
+// ─── MODAL ───
+function abrirFechar(){
+  var total=cart.reduce(function(s,i){return s+i.total},0);
+  G('fc-total').textContent=fmt(total);
+  G('m-fechar').classList.add('on');
+}
+
+// ─── TABS ───
+function goTab(id,el){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('on')});
+  G('panel-'+id).classList.add('on');el.classList.add('on');
+  if(id==='config'){renderCfgMK();renderCfgSrv()}
+  if(id==='carrinho'){renderCart()}
+}
+
+// ─── STORAGE ───
+var GS_KEY='am_gs_url';var TINY_KEY='am_tiny';var MK_KEY='am_mk';var SRV_KEY='am_srv';var CACHE_KEY='am_cache';
+function getGS(){return localStorage.getItem(GS_KEY)||''}
+function getTiny(){return localStorage.getItem(TINY_KEY)||''}
+function getMK(){try{var m=JSON.parse(localStorage.getItem(MK_KEY));if(m)return m}catch(e){}return{flor:4,folha:4,planta:2.5,orquidea:2.5,vaso:2,insumo:2,embalagem:2}}
+function getSrvCfg(){try{var s=JSON.parse(localStorage.getItem(SRV_KEY));if(s)return s}catch(e){}return{}}
+function saveCache(){localStorage.setItem(CACHE_KEY,JSON.stringify(DB))}
+function loadCache(){try{var c=JSON.parse(localStorage.getItem(CACHE_KEY)||'null');if(c&&c.produtos&&c.produtos.length){DB=c;return true}}catch(e){}return false}
+
+// ─── DB ───
+var DB={usuarios:[],produtos:[],servicos:[],montagens:[],markups:{}};
+
+function calcPV(p){
+  var mk=DB.markups[p.categoria]||getMK()[p.categoria]||2;
+  return Math.ceil(p.custo_unit*mk*2)/2;
+}
+
+// ─── FALLBACK DATA ───
+function loadFallback(){
+  DB.markups=getMK();
+  DB.produtos=[
+    {id:'ROVI',nome:'Rosa Vermelha',categoria:'flor',unidade:'haste',custo_total:150,qtd_embalagem:25,custo_unit:6},
+    {id:'ROPI',nome:'Rosa Cor de Rosa',categoria:'flor',unidade:'haste',custo_total:150,qtd_embalagem:25,custo_unit:6},
+    {id:'CRIS',nome:'Crisântemo',categoria:'flor',unidade:'haste',custo_total:55,qtd_embalagem:20,custo_unit:2.75},
+    {id:'CRSP',nome:'Cravo Spray',categoria:'flor',unidade:'haste',custo_total:55,qtd_embalagem:20,custo_unit:2.75},
+    {id:'GIRA',nome:'Girassol',categoria:'flor',unidade:'haste',custo_total:86.2,qtd_embalagem:20,custo_unit:4.31},
+    {id:'ALST',nome:'Alstroemeria',categoria:'flor',unidade:'haste',custo_total:20.4,qtd_embalagem:20,custo_unit:1.02},
+    {id:'LISI',nome:'Lisianthus',categoria:'flor',unidade:'haste',custo_total:7.34,qtd_embalagem:1,custo_unit:7.34},
+    {id:'RUSC',nome:'Ruscus',categoria:'folha',unidade:'haste',custo_total:1.70,qtd_embalagem:1,custo_unit:1.70},
+    {id:'EUCA',nome:'Eucalipto',categoria:'folha',unidade:'haste',custo_total:2.50,qtd_embalagem:1,custo_unit:2.50},
+    {id:'OQL1',nome:'Orquídea Multiflora Cali',categoria:'orquidea',unidade:'un',custo_total:37.54,qtd_embalagem:1,custo_unit:37.54},
+    {id:'OQL2',nome:'Orquídea Multiflora Branca',categoria:'orquidea',unidade:'un',custo_total:37.54,qtd_embalagem:1,custo_unit:37.54},
+    {id:'OQL3',nome:'Phalaenopsis Dupla',categoria:'orquidea',unidade:'un',custo_total:52,qtd_embalagem:1,custo_unit:52},
+    {id:'PLT1',nome:'Ficus Lyrata',categoria:'planta',unidade:'un',custo_total:37.54,qtd_embalagem:1,custo_unit:37.54},
+    {id:'PLT2',nome:'Zamioculca',categoria:'planta',unidade:'un',custo_total:22,qtd_embalagem:1,custo_unit:22},
+    {id:'PLT3',nome:'Monstera Deliciosa',categoria:'planta',unidade:'un',custo_total:45,qtd_embalagem:1,custo_unit:45},
+    {id:'VAS1',nome:'Cachepot Cerâmica P',categoria:'vaso',unidade:'un',custo_total:12.5,qtd_embalagem:1,custo_unit:12.5},
+    {id:'VAS2',nome:'Cachepot Cerâmica M',categoria:'vaso',unidade:'un',custo_total:22.5,qtd_embalagem:1,custo_unit:22.5},
+    {id:'VAS3',nome:'Cachepot Rattan G',categoria:'vaso',unidade:'un',custo_total:40,qtd_embalagem:1,custo_unit:40},
+    {id:'INS1',nome:'Substrato',categoria:'insumo',unidade:'L',custo_total:1.5,qtd_embalagem:1,custo_unit:1.5,insumo_tipo:'plantio'},
+    {id:'INS2',nome:'Argila Expandida',categoria:'insumo',unidade:'L',custo_total:0.8,qtd_embalagem:1,custo_unit:0.8,insumo_tipo:'plantio'},
+    {id:'INS3',nome:'Manta Drenagem',categoria:'insumo',unidade:'un',custo_total:1.5,qtd_embalagem:1,custo_unit:1.5,insumo_tipo:'plantio'},
+    {id:'INS4',nome:'Acabamento',categoria:'insumo',unidade:'L',custo_total:1.2,qtd_embalagem:1,custo_unit:1.2,insumo_tipo:'ambos'},
+    {id:'INS5',nome:'Casca de Pinus',categoria:'insumo',unidade:'L',custo_total:1.0,qtd_embalagem:1,custo_unit:1.0,insumo_tipo:'orquidea'},
+    {id:'INS6',nome:'Musgo Fofão',categoria:'insumo',unidade:'un',custo_total:3.5,qtd_embalagem:1,custo_unit:3.5,insumo_tipo:'orquidea'},
+    {id:'EMB1',nome:'Cone Kraft',categoria:'embalagem',unidade:'un',custo_total:5,qtd_embalagem:1,custo_unit:5},
+    {id:'EMB2',nome:'Papel Seda',categoria:'embalagem',unidade:'un',custo_total:7.5,qtd_embalagem:1,custo_unit:7.5},
+    {id:'EMB3',nome:'Caixa Premium',categoria:'embalagem',unidade:'un',custo_total:12.5,qtd_embalagem:1,custo_unit:12.5},
+    {id:'EMB4',nome:'Caixa Orquídea',categoria:'embalagem',unidade:'un',custo_total:10,qtd_embalagem:1,custo_unit:10},
+  ];
+  DB.servicos=[
+    {id:'rep_p',nome:'Repotagem Pequeno',descricao:'Vaso até 14 cm',grupo:'Repotagem',preco:15,usa_insumos:'sim'},
+    {id:'rep_m',nome:'Repotagem Médio',descricao:'Vaso 15–24 cm',grupo:'Repotagem',preco:25,usa_insumos:'sim'},
+    {id:'rep_g',nome:'Repotagem Grande',descricao:'Vaso 25–35 cm',grupo:'Repotagem',preco:40,usa_insumos:'sim'},
+    {id:'rep_gg',nome:'Repotagem Extra',descricao:'Acima de 35 cm',grupo:'Repotagem',preco:65,usa_insumos:'sim'},
+    {id:'fur',nome:'Furação de Vaso',descricao:'Furo de drenagem na base',grupo:'Serviços',preco:10,usa_insumos:'nao'},
+    {id:'adu',nome:'Adubação Especializada',descricao:'Adubo para a espécie',grupo:'Serviços',preco:15,usa_insumos:'nao'},
+    {id:'sup',nome:'Montagem em Suporte',descricao:'Placa, cesto ou madeira',grupo:'Serviços',preco:25,usa_insumos:'nao'},
+    {id:'ter',nome:'Terrário',descricao:'Pedriscos, madeira, musgo',grupo:'Serviços',preco:20,usa_insumos:'sim'},
+  ];
+  DB.montagens=[
+    {id:'sem',nome:'Sem montagem',percentual:0},
+    {id:'buqs',nome:'Buquê simples',percentual:15},
+    {id:'buqe',nome:'Buquê elaborado',percentual:25},
+    {id:'arrm',nome:'Arranjo de mesa',percentual:35},
+    {id:'cen',nome:'Centro de mesa',percentual:50},
+    {id:'arrp',nome:'Arranjo de parede',percentual:70},
+  ];
+  DB.usuarios=[
+    {login:'gerente',senha:'amabile',nome:'Gerente',perfil:'gerente',iniciais:'GE'},
+    {login:'vendedor',senha:'1234',nome:'Vendedor',perfil:'vendedor',iniciais:'VE'},
+  ];
+  // Recalcular insumos por tipo
+  DB.produtos.forEach(function(p){if(p.insumo_tipo)p.insumo_tipo=p.insumo_tipo.toLowerCase().trim()});
+}
+
+// ─── GOOGLE SHEETS ───
+function gsGet(tab,cb){
+  var url=getGS();
+  if(!url){if(cb)cb(null,'sem url');return}
+  fetch(url+'?tab='+tab)
+    .then(function(r){return r.json()})
+    .then(function(d){if(cb)cb(d,null)})
+    .catch(function(e){if(cb)cb(null,e.message)})
+}
+function gsPost(data,cb){
+  var url=getGS();
+  if(!url){if(cb)cb(null,'sem url');return}
+  fetch(url,{method:'POST',body:JSON.stringify(data)})
+    .then(function(r){return r.json()})
+    .then(function(d){if(cb)cb(d,null)})
+    .catch(function(e){if(cb)cb(null,e.message)})
+}
+
+function syncAll(cb){
+  var url=getGS();
+  if(!url){toast('Configure a URL do Sheets em ⚙️ Config');if(cb)cb(false);return}
+  G('syncbar').classList.add('on');G('syncmsg').textContent='Sincronizando…';
+  var total=5,done=0,erros=0;
+  function fin(){
+    done++;
+    if(done<total)return;
+    G('syncbar').classList.remove('on');
+    if(erros===0){toast('Dados atualizados ✓');saveCache()}
+    else toast('Sync parcial — verifique conexão');
+    buildAll();
+    if(cb)cb(erros===0);
+  }
+  gsGet('Usuarios',function(rows,err){
+    if(!err&&rows&&rows.length)DB.usuarios=rows;
+    else erros++;fin();
+  });
+  gsGet('Produtos',function(rows,err){
+    if(!err&&rows&&rows.length){
+      var prods=rows.filter(function(r){return r.id&&r.nome&&(r.ativo||'sim').toString().toLowerCase()!=='nao'});
+      prods.forEach(function(r){
+        var ct=cleanNum(r.custo_total);
+        var qe=cleanNum(r.qtd_embalagem)||1;
+        r.custo_unit=ct/qe;
+        r.custo_total=ct;r.qtd_embalagem=qe;
+        r.insumo_tipo=(r.insumo_tipo||'').toString().toLowerCase().trim();
+        r.categoria=(r.categoria||'').toString().toLowerCase().trim();
+      });
+      DB.produtos=prods;
+    }else erros++;fin();
+  });
+  gsGet('Servicos',function(rows,err){
+    if(!err&&rows&&rows.length)DB.servicos=rows.filter(function(r){return(r.ativo||'sim').toString().toLowerCase()!=='nao'});
+    else erros++;fin();
+  });
+  gsGet('Montagens',function(rows,err){
+    if(!err&&rows&&rows.length)DB.montagens=rows.filter(function(r){return(r.ativo||'sim').toString().toLowerCase()!=='nao'});
+    else erros++;fin();
+  });
+  gsGet('Markups',function(rows,err){
+    if(!err&&rows&&rows.length){var mk={};rows.forEach(function(r){mk[r.categoria]=parseFloat(r.multiplicador)||2});DB.markups=mk}
+    else erros++;fin();
+  });
+}
+
+function doSync(){
+  var url=getGS();
+  if(!url){toast('Configure a URL em ⚙️ Config');return}
+  syncAll(null);
+}
+
+// ─── INSUMOS helpers ───
+function getInsPlantio(){
+  var r=DB.produtos.filter(function(p){return p.categoria==='insumo'&&(p.insumo_tipo==='plantio'||p.insumo_tipo==='ambos')});
+  return r.length?r:DB.produtos.filter(function(p){return p.categoria==='insumo'});
+}
+function getInsOrq(){
+  var r=DB.produtos.filter(function(p){return p.categoria==='insumo'&&(p.insumo_tipo==='orquidea'||p.insumo_tipo==='ambos')});
+  return r.length?r:DB.produtos.filter(function(p){return p.categoria==='insumo'});
+}
+
+// ─── BUILD ALL ───
+function buildAll(){
+  buildArrFG();buildArrSelectores();
+  buildPSelects();buildOSelects();
+  buildSrvLista();buildExtraOpts();
+  buildVendedores();
+}
+
+// ─── LOGIN ───
+var USER=null;
+function tentarLogin(){
+  var lg=G('inp-login').value.trim().toLowerCase();
+  var pw=G('inp-senha').value.trim();
+  var users=DB.usuarios.length?DB.usuarios:[{login:'gerente',senha:'amabile',nome:'Gerente',perfil:'gerente',iniciais:'GE'},{login:'vendedor',senha:'1234',nome:'Vendedor',perfil:'vendedor',iniciais:'VE'}];
+  var u=null;
+  for(var i=0;i<users.length;i++){if((users[i].login||'').toLowerCase()===lg&&(users[i].senha||'')===pw&&(users[i].ativo||'sim').toString().toLowerCase()!=='nao'){u=users[i];break}}
+  if(!u){G('lerr').style.display='block';return}
+  G('lerr').style.display='none';USER=u;
+  G('login-screen').style.display='none';
+  G('app').style.display='flex';
+  G('app-av').textContent=u.iniciais||(u.nome||'').slice(0,2).toUpperCase();
+  G('app-nome').textContent=u.nome||u.login;
+  if(u.perfil==='gerente'){G('nb-cfg').style.display='';G('tiny-inp').value=getTiny();G('gs-inp').value=getGS()}
+  buildAll();
+  var url=getGS();
+  if(url)syncAll(function(ok){if(!ok)toast('Usando dados locais')});
+  else toast('Configure o Google Sheets em ⚙️ Config');
+}
+G('inp-senha').addEventListener('keydown',function(e){if(e.key==='Enter')tentarLogin()});
+G('inp-login').addEventListener('keydown',function(e){if(e.key==='Enter')G('inp-senha').focus()});
+
+function logout(){if(!confirm('Sair?'))return;USER=null;G('app').style.display='none';G('login-screen').style.display='flex';G('inp-login').value='';G('inp-senha').value=''}
+
+// ─── ARRANJO ───
+var arrQtds={};var arrMont=0;var arrEmb=0;
+
+function buildArrFG(){
+  var flores=DB.produtos.filter(function(p){return p.categoria==='flor'||p.categoria==='folha'});
+  var fg=G('arr-fg');if(!fg)return;
+  fg.innerHTML=flores.map(function(p){
+    var pv=calcPV(p);var q=arrQtds[p.id]||0;
+    return '<div class="fc'+(q>0?' sel':'')+'" id="afc-'+p.id+'">'
+      +'<div class="fn">'+p.nome+'</div>'
+      +'<div class="fp">'+fmt(pv)+'</div>'
+      +'<div class="qr">'
+      +'<div class="qbtn'+(q>0?' on':'')+'" data-id="'+p.id+'" data-d="-1">&#8722;</div>'
+      +'<div class="qnum" id="aqn-'+p.id+'">'+q+'</div>'
+      +'<div class="qbtn'+(q>0?' on':'')+'" data-id="'+p.id+'" data-d="1">+</div>'
+      +'</div></div>';
+  }).join('');
+  fg.onclick=function(e){
+    var b=e.target.closest('[data-id]');if(!b)return;
+    var id=b.getAttribute('data-id');var d=parseInt(b.getAttribute('data-d'));
+    arrQtds[id]=Math.max(0,(arrQtds[id]||0)+d);
+    var q=arrQtds[id];
+    var card=G('afc-'+id);
+    if(card){card.className='fc'+(q>0?' sel':'');card.querySelectorAll('.qbtn').forEach(function(x){x.className='qbtn'+(q>0?' on':'')})}
+    var qn=G('aqn-'+id);if(qn)qn.textContent=q;
+    arrPills();arrCalc();
+  };
+}
+
+function buildArrSelectores(){
+  var vasos=DB.produtos.filter(function(p){return p.categoria==='vaso'});
+  G('arr-vaso').innerHTML='<option value="0">— Sem vaso —</option>'+vasos.map(function(p){return '<option value="'+calcPV(p)+'">'+p.nome+' — '+fmt(calcPV(p))+'</option>'}).join('');
+  var mg=G('arr-mont');
+  mg.innerHTML=DB.montagens.map(function(m){
+    var pct=parseFloat(m.percentual)||0;
+    return '<button class="pb'+(pct===arrMont?' sel':'')+'" data-pct="'+pct+'" onclick="selMont(this)">'
+      +m.nome+'<small>'+(pct>0?pct+'% flores':'—')+'</small></button>';
+  }).join('');
+  var embs=DB.produtos.filter(function(p){return p.categoria==='embalagem'});
+  G('arr-emb').innerHTML='<button class="pb'+(arrEmb===0?' sel':'')+'" data-emb="0" onclick="selEmb(this)">Sem embalagem<small>—</small></button>'
+    +embs.map(function(p){var pv=calcPV(p);return '<button class="pb'+(arrEmb===pv?' sel':'')+'" data-emb="'+pv+'" onclick="selEmb(this)">'+p.nome+'<small>'+fmt(pv)+'</small></button>'}).join('');
+}
+
+function selMont(btn){document.querySelectorAll('[data-pct]').forEach(function(b){b.classList.remove('sel')});btn.classList.add('sel');arrMont=parseFloat(btn.getAttribute('data-pct'))||0;arrCalc()}
+function selEmb(btn){document.querySelectorAll('[data-emb]').forEach(function(b){b.classList.remove('sel')});btn.classList.add('sel');arrEmb=parseFloat(btn.getAttribute('data-emb'))||0;arrCalc()}
+
+function arrPills(){
+  var flores=DB.produtos.filter(function(p){return p.categoria==='flor'||p.categoria==='folha'});
+  G('arr-pills').innerHTML=flores.filter(function(p){return(arrQtds[p.id]||0)>0}).map(function(p){return '<span class="pill">'+p.nome+' ×'+arrQtds[p.id]+'</span>'}).join('');
+}
+
+function arrCalc(){
+  var flores=DB.produtos.filter(function(p){return p.categoria==='flor'||p.categoria==='folha'});
+  var fl=flores.reduce(function(s,p){return s+(arrQtds[p.id]||0)*calcPV(p)},0);
+  var mv=fl*(arrMont/100);var vv=parseFloat(G('arr-vaso').value)||0;
+  var total=fl+mv+vv+arrEmb;
+  G('arr-bv').textContent=fmt(total);
+  var res=G('arr-res');res.style.display=total>0?'':'none';
+  G('ar-fl').textContent=fmt(fl);
+  G('ar-mv').textContent=fmt(mv);G('ar-mr').style.display=mv>0?'':'none';
+  G('ar-vv').textContent=fmt(vv);G('ar-vr').style.display=vv>0?'':'none';
+  G('ar-ev').textContent=fmt(arrEmb);G('ar-er').style.display=arrEmb>0?'':'none';
+  G('ar-tot').textContent=fmt(total);
+}
+
+// ─── PLANTA ───
+var pInsQtds={};var pExtras=[];
+
+function buildPSelects(){
+  var plantas=DB.produtos.filter(function(p){return p.categoria==='planta'});
+  var vasos=DB.produtos.filter(function(p){return p.categoria==='vaso'});
+  G('p-planta').innerHTML='<option value="">— Selecione —</option>'+plantas.map(function(p){return '<option value="'+p.id+'">'+p.nome+'</option>'}).join('');
+  G('p-vaso').innerHTML='<option value="0">— Selecione —</option>'+vasos.map(function(p){return '<option value="'+calcPV(p)+'|'+p.nome+'">'+p.nome+' — '+fmt(calcPV(p))+'</option>'}).join('');
+}
+
+function pSelPlanta(){
+  var id=G('p-planta').value;var info=G('p-info');
+  if(!id){info.style.display='none';G('p-ins').innerHTML='<div class="ins-wrap"><div style="padding:10px 0;font-size:13px;color:var(--muted)">Selecione a planta primeiro</div></div>';pCalc();return}
+  var p=DB.produtos.filter(function(x){return x.id===id})[0];if(!p)return;
+  var pv=calcPV(p);
+  info.style.display='block';info.innerHTML=p.nome+' &nbsp;·&nbsp; Preço de venda: <strong>'+fmt(pv)+'</strong>';
+  G('ps1').className='stepn ok';
+  var ins=getInsPlantio();pInsQtds={};ins.forEach(function(i){pInsQtds[i.id]=2});
+  G('p-ins').innerHTML='<div class="ins-wrap">'+ins.map(function(i){
+    return '<div class="ins-row"><div class="ins-info"><div class="ins-nome">'+i.nome+'</div><div class="ins-un">'+i.unidade+'</div></div>'
+      +'<input class="ins-qtd" type="number" min="0" step="0.5" value="2" oninput="pSetIns(\''+i.id+'\','+i.custo_unit+',this.value)">'
+      +'<div class="ins-tot" id="pi-'+i.id+'">'+fmt(i.custo_unit*2)+'</div></div>';
+  }).join('')+'</div>';
+  G('ps3').className='stepn ok';pCalc();
+}
+
+function pSetIns(id,c,v){pInsQtds[id]=Math.max(0,parseFloat(v)||0);var t=G('pi-'+id);if(t)t.textContent=fmt(c*pInsQtds[id]);pCalc()}
+
+function pCalc(){
+  var id=G('p-planta').value;var vv=parseFloat((G('p-vaso').value||'0').split('|')[0])||0;
+  var pPV=id?(function(){var p=DB.produtos.filter(function(x){return x.id===id})[0];return p?calcPV(p):0})():0;
+  var ins=getInsPlantio();
+  var insT=ins.reduce(function(s,i){return s+i.custo_unit*(pInsQtds[i.id]||0)},0);
+  var extT=pExtras.reduce(function(s,e){return s+e.pv*e.qtd},0);
+  var total=pPV+vv+insT+extT;
+  G('p-bv').textContent=fmt(total);
+  G('p-res').style.display=total>0?'':'none';
+  G('pr-pl').textContent=fmt(pPV);G('pr-vv').textContent=fmt(vv);G('pr-vr').style.display=vv>0?'':'none';
+  G('pr-iv').textContent=fmt(insT);G('pr-ir').style.display=insT>0?'':'none';
+  G('pr-ev').textContent=fmt(extT);G('pr-er').style.display=extT>0?'':'none';
+  G('pr-tot').textContent=fmt(total);
+  if(vv>0)G('ps2').className='stepn ok';
+}
+
+// ─── ORQUÍDEA ───
+var oInsQtds={};var oExtras=[];var oEmb=0;
+
+function buildOSelects(){
+  var orqs=DB.produtos.filter(function(p){return p.categoria==='orquidea'});
+  var vasos=DB.produtos.filter(function(p){return p.categoria==='vaso'});
+  var embs=DB.produtos.filter(function(p){return p.categoria==='embalagem'});
+  G('o-orq').innerHTML='<option value="">— Selecione —</option>'+orqs.map(function(p){return '<option value="'+p.id+'">'+p.nome+'</option>'}).join('');
+  G('o-vaso').innerHTML='<option value="0">— Selecione —</option>'+vasos.map(function(p){return '<option value="'+calcPV(p)+'|'+p.nome+'">'+p.nome+' — '+fmt(calcPV(p))+'</option>'}).join('');
+  G('o-emb').innerHTML='<button class="pb'+(oEmb===0?' sel':'')+'" data-oemb="0" onclick="selOEmb(this)">Sem embalagem<small>—</small></button>'
+    +embs.map(function(p){var pv=calcPV(p);return '<button class="pb'+(oEmb===pv?' sel':'')+'" data-oemb="'+pv+'" onclick="selOEmb(this)">'+p.nome+'<small>'+fmt(pv)+'</small></button>'}).join('');
+}
+
+function selOEmb(btn){document.querySelectorAll('[data-oemb]').forEach(function(b){b.classList.remove('sel')});btn.classList.add('sel');oEmb=parseFloat(btn.getAttribute('data-oemb'))||0;oCalc()}
+
+function oSelOrq(){
+  var id=G('o-orq').value;var info=G('o-info');
+  if(!id){info.style.display='none';G('o-ins').innerHTML='<div class="ins-wrap"><div style="padding:10px 0;font-size:13px;color:var(--muted)">Selecione a orquídea primeiro</div></div>';oCalc();return}
+  var p=DB.produtos.filter(function(x){return x.id===id})[0];if(!p)return;
+  var pv=calcPV(p);
+  info.style.display='block';info.innerHTML=p.nome+' &nbsp;·&nbsp; Preço de venda: <strong>'+fmt(pv)+'</strong>';
+  G('os1').className='stepn ok';
+  var ins=getInsOrq();oInsQtds={};ins.forEach(function(i){oInsQtds[i.id]=1});
+  G('o-ins').innerHTML='<div class="ins-wrap">'+ins.map(function(i){
+    return '<div class="ins-row"><div class="ins-info"><div class="ins-nome">'+i.nome+'</div><div class="ins-un">'+i.unidade+'</div></div>'
+      +'<input class="ins-qtd" type="number" min="0" step="0.5" value="1" oninput="oSetIns(\''+i.id+'\','+i.custo_unit+',this.value)">'
+      +'<div class="ins-tot" id="oi-'+i.id+'">'+fmt(i.custo_unit)+'</div></div>';
+  }).join('')+'</div>';
+  G('os3').className='stepn ok';oCalc();
+}
+
+function oSetIns(id,c,v){oInsQtds[id]=Math.max(0,parseFloat(v)||0);var t=G('oi-'+id);if(t)t.textContent=fmt(c*oInsQtds[id]);oCalc()}
+
+function oCalc(){
+  var id=G('o-orq').value;var vv=parseFloat((G('o-vaso').value||'0').split('|')[0])||0;
+  var oPV=id?(function(){var p=DB.produtos.filter(function(x){return x.id===id})[0];return p?calcPV(p):0})():0;
+  var ins=getInsOrq();
+  var insT=ins.reduce(function(s,i){return s+i.custo_unit*(oInsQtds[i.id]||0)},0);
+  var extT=oExtras.reduce(function(s,e){return s+e.pv*e.qtd},0);
+  var total=oPV+vv+insT+oEmb+extT;
+  G('o-bv').textContent=fmt(total);
+  G('o-res').style.display=total>0?'':'none';
+  G('or-oq').textContent=fmt(oPV);G('or-vv').textContent=fmt(vv);G('or-vr').style.display=vv>0?'':'none';
+  G('or-iv').textContent=fmt(insT);G('or-ir').style.display=insT>0?'':'none';
+  G('or-embv').textContent=fmt(oEmb);G('or-embr').style.display=oEmb>0?'':'none';
+  G('or-ev').textContent=fmt(extT);G('or-er').style.display=extT>0?'':'none';
+  G('or-tot').textContent=fmt(total);
+  if(vv>0)G('os2').className='stepn ok';
+}
+
+// ─── EXTRAS ───
+function buildExtraOpts(){
+  var opts='<option value="">— Produto —</option>'+DB.produtos.map(function(p){var pv=calcPV(p);return '<option value="'+p.id+'|'+pv+'|'+p.nome+'">'+p.nome+' — '+fmt(pv)+'</option>'}).join('');
+  ['p-xsel','o-xsel'].forEach(function(id){var el=G(id);if(el)el.innerHTML=opts});
+}
+function toggleX(prefix){G(prefix+'-xdrop').classList.toggle('on')}
+function addExtra(prefix){
+  var sel=G(prefix+'-xsel');var qtd=parseInt(G(prefix+'-xqtd').value)||1;
+  if(!sel||!sel.value)return;
+  var parts=sel.value.split('|');
+  var extras=prefix==='p'?pExtras:oExtras;
+  extras.push({id:parts[0],pv:parseFloat(parts[1]),nome:parts[2],qtd:qtd});
+  sel.value='';G(prefix+'-xqtd').value=1;G(prefix+'-xdrop').classList.remove('on');
+  renderExtras(prefix);prefix==='p'?pCalc():oCalc();
+}
+function renderExtras(prefix){
+  var extras=prefix==='p'?pExtras:oExtras;var div=G(prefix+'-xlist');if(!div)return;
+  if(!extras.length){div.innerHTML='';return}
+  div.innerHTML='<div class="ins-wrap">'+extras.map(function(e,i){
+    return '<div class="xitem"><span>'+e.nome+' ×'+e.qtd+'</span><strong>'+fmt(e.pv*e.qtd)+'</strong>'
+      +'<button class="xdel" onclick="delExtra(\''+prefix+'\','+i+')">×</button></div>';
+  }).join('')+'</div>';
+}
+function delExtra(prefix,i){var extras=prefix==='p'?pExtras:oExtras;extras.splice(i,1);renderExtras(prefix);prefix==='p'?pCalc():oCalc()}
+
+// ─── SERVIÇOS ───
+var srvSel={};var srvQtds={};var srvInsQtds={};
+
+function buildSrvLista(){
+  var el=G('srv-lista');if(!el)return;
+  var cfg=getSrvCfg();
+  var grupos={};
+  DB.servicos.forEach(function(s){if(!grupos[s.grupo])grupos[s.grupo]=[];grupos[s.grupo].push(s)});
+  var html='';
+  Object.keys(grupos).forEach(function(g){
+    html+='<div class="grp-lbl">'+g+'</div>';
+    grupos[g].forEach(function(s){
+      var on=!!srvSel[s.id];
+      var preco=cfg[s.id]||parseFloat(s.preco)||0;
+      var qtd=srvQtds[s.id]||1;
+      html+='<div class="srv-wrap">'
+        +'<div class="srv-top" onclick="toggleSrv(\''+s.id+'\')">'
+        +'<div class="srv-chk'+(on?' on':'')+'">'+(on?'<svg width="11" height="9" viewBox="0 0 11 9"><path d="M1 4l3.5 3.5L10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+'</div>'
+        +'<div><div class="srv-nome">'+s.nome+'</div><div class="srv-desc">'+s.descricao+'</div></div>'
+        +'<div class="srv-preco">'+fmt(preco)+'/un</div>'
+        +'</div>'
+        +(on?'<div class="srv-qtd-row">'
+          +'<span class="srv-qlbl">Qtd:</span>'
+          +'<div class="sqbtn" onclick="adjSrv(event,\''+s.id+'\',-1)">&#8722;</div>'
+          +'<span class="sqnum">'+qtd+'</span>'
+          +'<div class="sqbtn" onclick="adjSrv(event,\''+s.id+'\',1)">+</div>'
+          +'<span class="srv-subtot">= '+fmt(preco*qtd)+'</span>'
+          +'</div>':'')
+        +'</div>';
+    });
+  });
+  el.innerHTML=html;
+  buildSrvIns();srvCalc();
+}
+
+function toggleSrv(id){srvSel[id]=!srvSel[id];if(srvSel[id]&&!srvQtds[id])srvQtds[id]=1;buildSrvLista()}
+function adjSrv(e,id,d){e.stopPropagation();srvQtds[id]=Math.max(1,(srvQtds[id]||1)+d);buildSrvLista()}
+
+function buildSrvIns(){
+  var cfg=getSrvCfg();
+  var usaIns=DB.servicos.some(function(s){return srvSel[s.id]&&(s.usa_insumos||'nao').toLowerCase()==='sim'});
+  var wrap=G('srv-ins-wrap');if(!wrap)return;
+  wrap.style.display=usaIns?'':'none';
+  if(!usaIns)return;
+  var ins=getInsPlantio();
+  G('srv-ins-card').innerHTML=ins.map(function(i){
+    if(!srvInsQtds[i.id])srvInsQtds[i.id]=1;
+    return '<div class="ins-row"><div class="ins-info"><div class="ins-nome">'+i.nome+'</div><div class="ins-un">'+i.unidade+'</div></div>'
+      +'<input class="ins-qtd" type="number" min="0" step="0.5" value="'+srvInsQtds[i.id]+'" oninput="setSrvIns(\''+i.id+'\','+i.custo_unit+',this.value)">'
+      +'<div class="ins-tot" id="si-'+i.id+'">'+fmt(i.custo_unit*(srvInsQtds[i.id]||1))+'</div></div>';
+  }).join('');
+}
+
+function setSrvIns(id,c,v){srvInsQtds[id]=Math.max(0,parseFloat(v)||0);var t=G('si-'+id);if(t)t.textContent=fmt(c*srvInsQtds[id]);srvCalc()}
+
+function srvCalc(){
+  var cfg=getSrvCfg();
+  var sel=DB.servicos.filter(function(s){return srvSel[s.id]});
+  var srvT=sel.reduce(function(s,x){return s+(cfg[x.id]||parseFloat(x.preco)||0)*(srvQtds[x.id]||1)},0);
+  var usaIns=sel.some(function(s){return(s.usa_insumos||'nao').toLowerCase()==='sim'});
+  var ins=getInsPlantio();
+  var insT=usaIns?ins.reduce(function(s,i){return s+i.custo_unit*(srvInsQtds[i.id]||0)},0):0;
+  var total=srvT+insT;
+  G('srv-bv').textContent=fmt(total);
+  G('srv-res').style.display=total>0?'':'none';
+  G('srv-tot').textContent=fmt(total);
+  G('srv-res-rows').innerHTML=sel.map(function(s){
+    return '<div class="rrow"><span>'+s.nome+(srvQtds[s.id]>1?' ×'+srvQtds[s.id]:'')+'</span><span>'+fmt((cfg[s.id]||parseFloat(s.preco)||0)*(srvQtds[s.id]||1))+'</span></div>';
+  }).join('')+(insT>0?'<div class="rrow"><span>Insumos</span><span>'+fmt(insT)+'</span></div>':'');
+}
+
+// ─── LIMPAR ───
+function limpar(tipo){
+  if(tipo==='arranjo'){
+    DB.produtos.forEach(function(p){arrQtds[p.id]=0});
+    arrMont=0;arrEmb=0;buildArrFG();buildArrSelectores();G('arr-pills').innerHTML='';
+    G('arr-res').style.display='none';G('arr-bv').textContent='R$ 0,00';toast('Arranjo limpo ✓');
+  }else if(tipo==='planta'){
+    G('p-planta').value='';G('p-vaso').value='0';pInsQtds={};pExtras=[];
+    G('p-info').style.display='none';G('p-res').style.display='none';G('p-bv').textContent='R$ 0,00';
+    G('p-ins').innerHTML='<div class="ins-wrap"><div style="padding:10px 0;font-size:13px;color:var(--muted)">Selecione a planta primeiro</div></div>';
+    G('p-xlist').innerHTML='';G('ps1').className='stepn';G('ps2').className='stepn';G('ps3').className='stepn';
+    toast('Planta limpa ✓');
+  }else if(tipo==='orquidea'){
+    G('o-orq').value='';G('o-vaso').value='0';oInsQtds={};oExtras=[];oEmb=0;
+    G('o-info').style.display='none';G('o-res').style.display='none';G('o-bv').textContent='R$ 0,00';
+    G('o-ins').innerHTML='<div class="ins-wrap"><div style="padding:10px 0;font-size:13px;color:var(--muted)">Selecione a orquídea primeiro</div></div>';
+    G('o-xlist').innerHTML='';document.querySelectorAll('[data-oemb]').forEach(function(b){b.classList.remove('sel')});
+    G('os1').className='stepn';G('os2').className='stepn';G('os3').className='stepn';
+    buildOSelects();toast('Orquídea limpa ✓');
+  }else if(tipo==='servico'){
+    DB.servicos.forEach(function(s){srvSel[s.id]=false;srvQtds[s.id]=1});
+    srvInsQtds={};buildSrvLista();toast('Serviços limpos ✓');
+  }
+}
+
+// ─── CARRINHO ───
+var cart=[];
+
+function addCart(tipo){
+  var item={tipo:tipo,id:Date.now()};
+  var cfg=getSrvCfg();
+  if(tipo==='arranjo'){
+    var flores=DB.produtos.filter(function(p){return p.categoria==='flor'||p.categoria==='folha'});
+    var fl=flores.reduce(function(s,p){return s+(arrQtds[p.id]||0)*calcPV(p)},0);
+    if(fl<=0){toast('Adicione flores ao arranjo');return}
+    var mv=fl*(arrMont/100);var vv=parseFloat(G('arr-vaso').value)||0;
+    item.total=fl+mv+vv+arrEmb;
+    item.nome='Arranjo Floral';
+    item.det=flores.filter(function(p){return(arrQtds[p.id]||0)>0}).map(function(p){return p.nome+'×'+arrQtds[p.id]}).join(', ');
+    limpar('arranjo');
+  }else if(tipo==='planta'){
+    var pid=G('p-planta').value;if(!pid){toast('Selecione a planta');return}
+    var pp=DB.produtos.filter(function(x){return x.id===pid})[0];var ppv=pp?calcPV(pp):0;
+    var pvv=parseFloat((G('p-vaso').value||'0').split('|')[0])||0;
+    var ins=getInsPlantio();
+    var insT=ins.reduce(function(s,i){return s+i.custo_unit*(pInsQtds[i.id]||0)},0);
+    var extT=pExtras.reduce(function(s,e){return s+e.pv*e.qtd},0);
+    item.total=ppv+pvv+insT+extT;item.nome=pp?pp.nome:'Planta em Vaso';
+    item.det='com vaso'+(pvv>0?'':', sem vaso')+(extT>0?', +extras':'');
+    limpar('planta');
+  }else if(tipo==='orquidea'){
+    var oid=G('o-orq').value;if(!oid){toast('Selecione a orquídea');return}
+    var op=DB.produtos.filter(function(x){return x.id===oid})[0];var opv=op?calcPV(op):0;
+    var ovv=parseFloat((G('o-vaso').value||'0').split('|')[0])||0;
+    var oins=getInsOrq();
+    var oinsT=oins.reduce(function(s,i){return s+i.custo_unit*(oInsQtds[i.id]||0)},0);
+    var oextT=oExtras.reduce(function(s,e){return s+e.pv*e.qtd},0);
+    item.total=opv+ovv+oinsT+oEmb+oextT;item.nome=op?op.nome:'Orquídea em Vaso';
+    item.det='com vaso'+(oEmb>0?', embalagem':'')+(oextT>0?', +extras':'');
+    limpar('orquidea');
+  }else if(tipo==='servico'){
+    var sel=DB.servicos.filter(function(s){return srvSel[s.id]});
+    if(!sel.length){toast('Selecione pelo menos um serviço');return}
+    var sT=sel.reduce(function(s,x){return s+(cfg[x.id]||parseFloat(x.preco)||0)*(srvQtds[x.id]||1)},0);
+    var usaIns=sel.some(function(s){return(s.usa_insumos||'nao').toLowerCase()==='sim'});
+    var sins=getInsPlantio();
+    var sinsT=usaIns?sins.reduce(function(s,i){return s+i.custo_unit*(srvInsQtds[i.id]||0)},0):0;
+    item.total=sT+sinsT;
+    item.nome=sel.length===1?sel[0].nome:'Serviços ('+sel.length+')';
+    item.det=sel.map(function(s){return s.nome+(( srvQtds[s.id]||1)>1?' ×'+srvQtds[s.id]:'')}).join(', ');
+    limpar('servico');
+  }
+  cart.push(item);updateBadge();renderCart();toast(item.nome+' adicionado ✓');
+  var nb=document.querySelector('[onclick="goTab(\'carrinho\',this)"]');
+  if(nb)goTab('carrinho',nb);
+}
+
+function updateBadge(){
+  var d=G('cart-dot');d.classList.toggle('on',cart.length>0);d.textContent=cart.length;
+  var total=cart.reduce(function(s,i){return s+i.total},0);G('fc-total').textContent=fmt(total);G('cart-grand').textContent=fmt(total);
+}
+
+function renderCart(){
+  var body=G('cart-body');var footer=G('cart-footer');
+  if(!cart.length){
+    body.innerHTML='<div class="cart-empty" style="text-align:center;padding:40px 20px;color:var(--muted)"><div style="font-size:36px;margin-bottom:10px;opacity:.2">🛒</div><div style="font-size:14px">Nenhum item ainda.<br>Use + Carrinho nas outras abas.</div></div>';
+    footer.style.display='none';return;
+  }
+  var grand=cart.reduce(function(s,i){return s+i.total},0);
+  var BNAMES={arranjo:'Arranjo',planta:'Planta',orquidea:'Orquídea',servico:'Serviço'};
+  body.innerHTML=cart.map(function(item){
+    return '<div class="ci"><div class="ci-top"><div class="ci-nome">'+item.nome+'</div><span class="ci-badge '+item.tipo+'">'+BNAMES[item.tipo]+'</span></div>'
+      +'<div class="ci-det">'+item.det+'</div>'
+      +'<div class="ci-bot"><div class="ci-val">'+fmt(item.total)+'</div>'
+      +'<button class="ci-del" onclick="delCart('+item.id+')">×</button></div></div>';
+  }).join('');
+  G('cart-grand').textContent=fmt(grand);footer.style.display='';
+}
+
+function delCart(id){cart=cart.filter(function(i){return i.id!==id});updateBadge();renderCart()}
+function limparCarrinho(){if(!confirm('Limpar todo o carrinho?'))return;cart=[];updateBadge();renderCart();toast('Carrinho limpo ✓')}
+
+function buildVendedores(){
+  var vsel=G('vsel');if(!vsel)return;
+  var users=DB.usuarios.length?DB.usuarios:[{nome:'Gerente'},{nome:'Vendedor'}];
+  vsel.innerHTML=users.map(function(u){return '<option>'+u.nome+'</option>'}).join('');
+  if(USER)vsel.value=USER.nome||USER.login;
+}
+
+// ─── WHATSAPP ───
+function enviarWA(){
+  if(!cart.length){toast('Carrinho vazio');return}
+  var vendedor=G('vsel').value||'Equipe Amabile';
+  var total=cart.reduce(function(s,i){return s+i.total},0);
+  var txt=['*Orçamento Amabile Plantas & Flores*',''];
+  cart.forEach(function(item,i){txt.push((i+1)+'. *'+item.nome+'* — '+fmt(item.total));if(item.det)txt.push('   _'+item.det+'_')});
+  txt.push('');txt.push('*Total: '+fmt(total)+'*');txt.push('');txt.push('Vendedor: '+vendedor);
+  txt.push('Amabile Plantas & Flores — Vila Mariana, SP');
+  window.open('https://wa.me/?text='+encodeURIComponent(txt.join('\n')),'_blank');
+}
+
+// ─── FECHAR PEDIDO ───
+function confirmarPedido(){
+  var cliente=G('fc-cliente').value.trim();if(!cliente){toast('Informe o cliente');return}
+  var total=cart.reduce(function(s,i){return s+i.total},0);
+  var vendedor=G('vsel').value||USER&&USER.nome||'—';
+  var itens=cart.map(function(i){return i.nome+' ('+fmt(i.total)+')'}).join(' | ');
+  var row=[Date.now(),new Date().toLocaleString('pt-BR'),vendedor,cliente,G('fc-tel').value||'—',G('fc-canal').value,itens,total.toFixed(2),'aberto',G('fc-obs').value||''];
+  gsPost({tab:'Pedidos',action:'append',row:row},function(d,err){if(err)toast('Pedido salvo localmente');else toast('Pedido registrado no Sheets ✓')});
+  G('m-fechar').classList.remove('on');cart=[];updateBadge();renderCart();
+  G('fc-cliente').value='';G('fc-obs').value='';
+}
+
+// ─── CONFIG ───
+function renderCfgMK(){
+  var mk=getMK();var el=G('cfg-mk');if(!el)return;
+  var cats=[{id:'flor',n:'Flores'},{id:'folha',n:'Folhagens'},{id:'planta',n:'Plantas'},{id:'orquidea',n:'Orquídeas'},{id:'vaso',n:'Vasos'},{id:'insumo',n:'Insumos'},{id:'embalagem',n:'Embalagens'}];
+  el.innerHTML=cats.map(function(c){
+    return '<div class="cfg-row"><div class="cfg-info"><div class="cfg-lbl">'+c.n+'</div></div>'
+      +'<input class="cfg-inp" id="mk-'+c.id+'" type="number" min="1" max="20" step="0.1" value="'+(mk[c.id]||2).toFixed(1)+'">'
+      +'<span style="font-size:13px;color:var(--muted)">×</span></div>';
+  }).join('');
+}
+function salvarMK(){
+  var cats=['flor','folha','planta','orquidea','vaso','insumo','embalagem'];var obj={};
+  cats.forEach(function(c){var el=G('mk-'+c);if(el)obj[c]=parseFloat(el.value)||2});
+  localStorage.setItem(MK_KEY,JSON.stringify(obj));DB.markups=obj;
+  buildArrFG();buildArrSelectores();buildPSelects();buildOSelects();buildSrvLista();toast('Markups salvos ✓');
+}
+function renderCfgSrv(){
+  var cfg=getSrvCfg();var el=G('cfg-srv');if(!el)return;
+  if(!DB.servicos.length){el.innerHTML='<div class="cfg-row"><div style="font-size:13px;color:var(--muted);padding:8px 0">Sincronize para ver serviços</div></div>';return}
+  el.innerHTML=DB.servicos.map(function(s){
+    var preco=cfg[s.id]||parseFloat(s.preco)||0;
+    return '<div class="cfg-row"><div class="cfg-info"><div class="cfg-lbl">'+s.nome+'</div><div class="cfg-sub">'+s.descricao+'</div></div>'
+      +'<span style="font-size:13px;color:var(--muted)">R$</span>'
+      +'<input class="cfg-inp" id="sv-'+s.id+'" type="number" min="0" step="1" value="'+preco.toFixed(0)+'"></div>';
+  }).join('');
+}
+function salvarSrvCfg(){
+  var cfg={};DB.servicos.forEach(function(s){var el=G('sv-'+s.id);if(el)cfg[s.id]=parseFloat(el.value)||parseFloat(s.preco)||0});
+  localStorage.setItem(SRV_KEY,JSON.stringify(cfg));buildSrvLista();toast('Preços salvos ✓');
+}
+function salvarTiny(){var v=G('tiny-inp').value.trim();if(!v){toast('Cole o token');return}localStorage.setItem(TINY_KEY,v);toast('Token salvo ✓')}
+function salvarGS(){var v=G('gs-inp').value.trim();if(!v){toast('Cole a URL');return}localStorage.setItem(GS_KEY,v);toast('URL salva ✓ — toque ⟳ para sincronizar')}
+
+// ─── OFFLINE / PWA ───
+window.addEventListener('offline',function(){G('offbar').style.display='block'});
+window.addEventListener('online',function(){G('offbar').style.display='none'});
+
+// ─── INIT ───
+loadFallback();
+loadCache();
+if(getGS()){
+  G('lsync').style.display='block';
+  (function(){
+    var url=getGS();
+    fetch(url+'?tab=Usuarios').then(function(r){return r.json()}).then(function(d){if(d&&d.length)DB.usuarios=d;G('lsync').style.display='none'}).catch(function(){G('lsync').textContent='Usando dados locais';setTimeout(function(){G('lsync').style.display='none'},2000)});
+  })();
+}else{
+  G('lsync').textContent='Configure o Sheets após o login';
+}
+</script>
+
+<script>
+if('serviceWorker' in navigator && location.protocol !== 'blob:'){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(function(){}).catch(function(){});
+  });
+}
+</script>
+</body>
+</html>
